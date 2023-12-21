@@ -3,6 +3,7 @@ package edu.najah.cap.data;
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.activity.UserActivityService;
+import edu.najah.cap.data.exportdatafeature.ExportData;
 import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.iam.UserService;
@@ -34,12 +35,8 @@ public class   Application {
         UserProfile user1 = userService.getUser("user1");
 
         System.out.println(user1.getUserType());
-//        ExpotData E = new ExpotData(user);
-//        System.out.println(E.getdata().toString());
 
-
-
-
+        ExportData exportData = new ExportData(user1,userActivityService,paymentService, userService, postService );
 
 
         //TODO Your application ends here. Do not Change the existing code
