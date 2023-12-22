@@ -6,15 +6,17 @@ import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.payment.IPayment;
 import edu.najah.cap.posts.IPostService;
+import edu.najah.cap.posts.Post;
+
+import java.util.List;
 
 public class NewUser extends ICreateDataObjectUser {
-
     public NewUser(UserProfile userProfile, IPostService postService, IUserService userService) {
         super(userService, userProfile, postService);
     }
 
     @Override
     public String getDataUser() {
-        return getUserProfile().getUserName() + "  " +  getUserProfile().getCity();
+        return super.getDataProfile() + super.getPostsDetails();
     }
 }

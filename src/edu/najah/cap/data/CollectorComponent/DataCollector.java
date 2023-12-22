@@ -34,8 +34,6 @@ public class DataCollector {
                userService,
                postService);
 
-       //  System.out.println(userData.getDataUser());
-
        return userData.getDataUser();
    }
    public  void dataProcess(){

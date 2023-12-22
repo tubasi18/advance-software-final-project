@@ -38,7 +38,7 @@ public class   Application {
 
         ExportData exportData = new ExportData(user1,userActivityService,paymentService, userService, postService );
 
-
+        exportData.exportData();
         //TODO Your application ends here. Do not Change the existing code
         Instant end = Instant.now();
         System.out.println("Application Ended: " + end);

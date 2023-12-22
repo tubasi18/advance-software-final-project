@@ -24,7 +24,6 @@ public class ExportData {
     }
 
     public void exportData() {
-        dataCollector.collectData();
-
+        String data = dataCollector.collectData();
     }
 }
