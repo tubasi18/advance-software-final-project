@@ -61,7 +61,11 @@ public abstract class ICreateDataObjectUser {
     public String getDataProfile() {
         return "Name: " + getUserProfile().getUserName()
                 + " " + getUserProfile().getLastName()
-                + "\n" + "City: " + getUserProfile().getCity()+ "\n";
+                + "\n" + "City: " + getUserProfile().getCity() + "\n";
+    }
+
+    public String getUserName() {
+        return getUserProfile().getUserName();
     }
 
     public abstract String getDataUser();

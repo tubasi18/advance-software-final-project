@@ -11,19 +11,13 @@ import edu.najah.cap.posts.IPostService;
 
 public class ExportData {
     DataCollector dataCollector;
-    public ExportData(UserProfile user,
-                      IUserActivityService userActivityService,
-                      IPayment paymentService, IUserService userService,
-                      IPostService postService) {
 
-        this.dataCollector = new DataCollector(userActivityService,
-                paymentService,
-                userService,
-                postService,
-                user);
+    public ExportData(UserProfile user) {
+        this.dataCollector = new DataCollector(user);
     }
 
     public void exportData() {
         String data = dataCollector.collectData();
+        System.out.println(data);
     }
 }

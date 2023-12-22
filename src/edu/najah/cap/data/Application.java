@@ -17,7 +17,7 @@ import edu.najah.cap.posts.PostService;
 
 import java.time.Instant;
 
-public class   Application {
+public class Application {
 
     private static final IUserActivityService userActivityService = new UserActivityService();
     private static final IPayment paymentService = new PaymentService();
@@ -32,11 +32,11 @@ public class   Application {
         //TODO Your application starts here. Do not Change the existing code
 
 
-        UserProfile user1 = userService.getUser("user1");
+        UserProfile user1 = userService.getUser("user4");
 
         System.out.println(user1.getUserType());
 
-        ExportData exportData = new ExportData(user1,userActivityService,paymentService, userService, postService );
+        ExportData exportData = new ExportData(user1);
 
         exportData.exportData();
         //TODO Your application ends here. Do not Change the existing code
