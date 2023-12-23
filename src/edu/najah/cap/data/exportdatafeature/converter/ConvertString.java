@@ -4,9 +4,8 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-
 import java.io.*;
-import java.lang.reflect.Array;
+
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 

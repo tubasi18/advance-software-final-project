@@ -12,7 +12,10 @@ import java.util.List;
 public class RegularUser extends ICreateDataObjectUser {
     IUserActivityService userActivityService;
 
-    public RegularUser(UserProfile userProfile, IPostService postService, IUserService userService, IUserActivityService userActivityService) {
+    public RegularUser(UserProfile userProfile,
+                       IPostService postService,
+                       IUserService userService,
+                       IUserActivityService userActivityService) {
         super(userService, userProfile, postService);
         this.userActivityService = userActivityService;
     }

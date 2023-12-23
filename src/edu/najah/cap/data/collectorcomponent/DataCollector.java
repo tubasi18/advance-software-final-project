@@ -4,7 +4,8 @@ import edu.najah.cap.data.exportdatafeature.factory.FactoryUserType;
 import edu.najah.cap.data.exportdatafeature.factory.interfaces.ICreateDataObjectUser;
 import edu.najah.cap.iam.UserProfile;
 
-public class DataCollector {
+
+public class DataCollector implements IDataCollector {
     private final UserProfile user;
 
     public DataCollector(UserProfile user) {

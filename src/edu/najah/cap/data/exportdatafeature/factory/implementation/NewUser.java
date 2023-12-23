@@ -6,7 +6,9 @@ import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.posts.IPostService;
 
 public class NewUser extends ICreateDataObjectUser {
-    public NewUser(UserProfile userProfile, IPostService postService, IUserService userService) {
+    public NewUser(UserProfile userProfile,
+                   IPostService postService,
+                   IUserService userService) {
         super(userService, userProfile, postService);
     }
 

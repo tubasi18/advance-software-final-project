@@ -10,11 +10,15 @@ import edu.najah.cap.posts.IPostService;
 
 import java.util.List;
 
-public class PremiumUser extends ICreateDataObjectUser   {
+public class PremiumUser extends ICreateDataObjectUser {
     IUserActivityService userActivityService;
     IPayment paymentService;
 
-    public PremiumUser(UserProfile userProfile, IUserActivityService userActivityService, IPayment paymentService, IUserService userService, IPostService postService) {
+    public PremiumUser(UserProfile userProfile,
+                       IUserActivityService userActivityService,
+                       IPayment paymentService,
+                       IUserService userService,
+                       IPostService postService) {
         super(userService, userProfile, postService);
         this.userActivityService = userActivityService;
         this.paymentService = paymentService;
