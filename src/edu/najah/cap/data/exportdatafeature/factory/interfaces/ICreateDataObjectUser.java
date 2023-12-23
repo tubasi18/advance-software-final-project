@@ -1,15 +1,13 @@
-package edu.najah.cap.data.exportdatafeature.factory.Interfaces;
+package edu.najah.cap.data.exportdatafeature.factory.interfaces;
 
-import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.iam.UserProfile;
-import edu.najah.cap.payment.IPayment;
 import edu.najah.cap.posts.IPostService;
 import edu.najah.cap.posts.Post;
 
 import java.util.List;
 
-public abstract class ICreateDataObjectUser {
+public abstract class ICreateDataObjectUser  {
     IUserService userService;
     UserProfile userProfile;
     IPostService postService;
@@ -38,7 +36,7 @@ public abstract class ICreateDataObjectUser {
         this.postService = postService;
     }
 
-    public ICreateDataObjectUser(IUserService userService, UserProfile userProfile, IPostService postService) {
+    protected ICreateDataObjectUser(IUserService userService, UserProfile userProfile, IPostService postService) {
         this.userService = userService;
         this.userProfile = userProfile;
         this.postService = postService;

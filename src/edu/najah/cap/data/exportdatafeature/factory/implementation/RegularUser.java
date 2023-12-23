@@ -1,8 +1,8 @@
-package edu.najah.cap.data.exportdatafeature.factory.SubClasses;
+package edu.najah.cap.data.exportdatafeature.factory.implementation;
 
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
-import edu.najah.cap.data.exportdatafeature.factory.Interfaces.ICreateDataObjectUser;
+import edu.najah.cap.data.exportdatafeature.factory.interfaces.ICreateDataObjectUser;
 import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.posts.IPostService;

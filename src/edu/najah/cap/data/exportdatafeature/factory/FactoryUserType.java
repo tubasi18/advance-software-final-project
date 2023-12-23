@@ -1,20 +1,18 @@
 package edu.najah.cap.data.exportdatafeature.factory;
 
-import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivityService;
-import edu.najah.cap.data.exportdatafeature.factory.Interfaces.ICreateDataObjectUser;
-import edu.najah.cap.data.exportdatafeature.factory.SubClasses.NewUser;
-import edu.najah.cap.data.exportdatafeature.factory.SubClasses.PremiumUser;
-import edu.najah.cap.data.exportdatafeature.factory.SubClasses.RegularUser;
-import edu.najah.cap.iam.IUserService;
+import edu.najah.cap.data.exportdatafeature.factory.interfaces.ICreateDataObjectUser;
+import edu.najah.cap.data.exportdatafeature.factory.implementation.NewUser;
+import edu.najah.cap.data.exportdatafeature.factory.implementation.PremiumUser;
+import edu.najah.cap.data.exportdatafeature.factory.implementation.RegularUser;
 import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.iam.UserService;
-import edu.najah.cap.payment.IPayment;
 import edu.najah.cap.payment.PaymentService;
-import edu.najah.cap.posts.IPostService;
 import edu.najah.cap.posts.PostService;
 
 public class FactoryUserType {
+
+    private FactoryUserType(){}
     public static ICreateDataObjectUser creationUserDataObject(UserProfile user) {
         return switch (user.getUserType()) {
             case NEW_USER -> new NewUser(user, new PostService(), new UserService());
@@ -27,7 +25,7 @@ public class FactoryUserType {
                     new PaymentService(),
                     new UserService(),
                     new PostService());
-            default -> throw new IllegalArgumentException("Unsupported this user type . ");
+            default -> throw new IllegalArgumentException("Unsupported this user type .");
         };
     }
 }

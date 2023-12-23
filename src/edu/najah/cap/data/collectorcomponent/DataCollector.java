@@ -1,12 +1,8 @@
-package edu.najah.cap.data.CollectorComponent;
+package edu.najah.cap.data.collectorcomponent;
 
-import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.data.exportdatafeature.factory.FactoryUserType;
-import edu.najah.cap.data.exportdatafeature.factory.Interfaces.ICreateDataObjectUser;
-import edu.najah.cap.iam.IUserService;
+import edu.najah.cap.data.exportdatafeature.factory.interfaces.ICreateDataObjectUser;
 import edu.najah.cap.iam.UserProfile;
-import edu.najah.cap.payment.IPayment;
-import edu.najah.cap.posts.IPostService;
 
 public class DataCollector {
     private final UserProfile user;
@@ -20,8 +16,4 @@ public class DataCollector {
 
        return userData.getDataUser();
    }
-   public  void dataProcess(){
-        // strategy
-   }
-
 }
