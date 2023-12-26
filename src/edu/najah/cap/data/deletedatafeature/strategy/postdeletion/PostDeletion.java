@@ -1,4 +1,12 @@
-package edu.najah.cap.data.deletedatafeature.strategy.subclasses;
+package edu.najah.cap.data.deletedatafeature.strategy.postdeletion;
 
-public class PostDeletion {
+import edu.najah.cap.data.Services;
+import edu.najah.cap.iam.UserProfile;
+
+public class PostDeletion implements PostDeletionBehavior{
+
+    @Override
+    public void deletePost(UserProfile user) {
+        Services.getUserPostServiceInstance().deletePost(user.getUserName(),user.getUserName());
+    }
 }

@@ -5,4 +5,5 @@ import edu.najah.cap.iam.UserProfile;
 
 public interface DeleteStrategy {
     void deleteData(UserProfile user);
+    
 }
