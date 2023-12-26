@@ -16,7 +16,7 @@ public class Util {
         if (!userName.startsWith("user")) {
             throw new BadRequestException("User name must start with 'user'");
         }
-        if (Instant.now().getEpochSecond() % 3 == 0) {
+        if (Instant.now().getEpochSecond() % 100 == 0) {
             throw new SystemBusyException("Something went wrong");
         }
 

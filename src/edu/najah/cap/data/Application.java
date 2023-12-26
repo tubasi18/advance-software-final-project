@@ -22,7 +22,6 @@ import edu.najah.cap.posts.IPostService;
 import edu.najah.cap.posts.Post;
 import edu.najah.cap.posts.PostService;
 
-import java.io.IOException;
 import java.time.Instant;
 import java.util.Map;
 import java.util.Scanner;
@@ -52,7 +51,7 @@ public class Application {
             System.out.println(user1.getUserType());
               ExportData exportData = new ExportData(user1, EnumAction.DOWNLOAD_DIRECTLY);
             exportData.exportData();
-            FactoryContext.factoryProcess(user1,true);
+            FactoryContext.factoryProcess(user1,false);
             for (Map.Entry<String, UserProfile> entry : userService.getUsers().entrySet()) {
                 System.out.println("Username: " + entry.getKey());
             }
