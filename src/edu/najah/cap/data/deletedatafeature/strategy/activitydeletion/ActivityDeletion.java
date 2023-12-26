@@ -1,14 +1,22 @@
 package edu.najah.cap.data.deletedatafeature.strategy.activitydeletion;
+
 import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.data.Services;
 import edu.najah.cap.iam.UserProfile;
+
+import java.util.Iterator;
 import java.util.List;
+
 public class ActivityDeletion implements ActivityDeletionBehavior {
     @Override
     public void deleteActivities(UserProfile user) {
-        List<UserActivity> userActivities= Services.getUserActivityServiceInstance().getUserActivity(user.getUserName());
-        for( UserActivity activity:userActivities){
-            Services.getUserActivityServiceInstance().removeUserActivity(user.getUserName(),activity.getId());
+        List<UserActivity> userActivities = Services.getUserActivityServiceInstance().getUserActivity(user.getUserName());
+        Iterator<UserActivity> iterator = userActivities.iterator();
+
+        while (iterator.hasNext()) {
+            UserActivity activity = iterator.next();
+            Services.getUserActivityServiceInstance().removeUserActivity(user.getUserName(), activity.getId());
+            iterator.remove();
         }
     }
 }

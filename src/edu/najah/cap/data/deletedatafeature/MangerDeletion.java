@@ -24,7 +24,12 @@ public class MangerDeletion {
         if (deleteContext.getPostDeletionBehavior() != null) {
             deleteContext.getPostDeletionBehavior().deletePost(user);
         }
+
     }
+    public void setDeletionContext(DeleteContext deletionContext) {
+        this.deleteContext = deletionContext;
+    }
+
 }
 
 

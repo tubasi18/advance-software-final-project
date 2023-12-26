@@ -5,6 +5,7 @@ import edu.najah.cap.data.deletedatafeature.strategy.interfaces.IDeleteContext;
 import edu.najah.cap.data.deletedatafeature.strategy.paymentdeletion.PaymentDeletionBehavior;
 import edu.najah.cap.data.deletedatafeature.strategy.postdeletion.PostDeletionBehavior;
 import edu.najah.cap.data.deletedatafeature.strategy.profiledeltion.ProfileDeletionBehavior;
+import edu.najah.cap.iam.UserProfile;
 
 public class DeleteContext implements IDeleteContext {
     private ActivityDeletionBehavior activityDeletionBehavior;
@@ -12,51 +13,51 @@ public class DeleteContext implements IDeleteContext {
     private ProfileDeletionBehavior profileDeletionBehavior;
     private PostDeletionBehavior postDeletionBehavior;
 
+    // Constructor with all behaviors
     public DeleteContext(ActivityDeletionBehavior activityDeletionBehavior,
                          PaymentDeletionBehavior paymentDeletionBehavior,
-                         ProfileDeletionBehavior profileDeletionBehavior, PostDeletionBehavior postDeletionBehavior) {
+                         ProfileDeletionBehavior profileDeletionBehavior,
+                         PostDeletionBehavior postDeletionBehavior) {
         this.activityDeletionBehavior = activityDeletionBehavior;
         this.paymentDeletionBehavior = paymentDeletionBehavior;
         this.profileDeletionBehavior = profileDeletionBehavior;
         this.postDeletionBehavior = postDeletionBehavior;
     }
 
-    public DeleteContext() {
-        activityDeletionBehavior = null;
-        paymentDeletionBehavior = null;
-        profileDeletionBehavior = null;
-        postDeletionBehavior = null;
+    // Execute the deletion process
+    public void executeDeletion(UserProfile user, boolean isHardDelete) {
+        if (postDeletionBehavior != null) {
+            postDeletionBehavior.deletePost(user);
+        }
+        if (activityDeletionBehavior != null) {
+            activityDeletionBehavior.deleteActivities(user);
+        }
+        if (paymentDeletionBehavior != null) {
+            paymentDeletionBehavior.deletePayment(user);
+        }
+        if (isHardDelete && profileDeletionBehavior != null) {
+            profileDeletionBehavior.deleteProfile(user);
+        }
     }
 
-    public ActivityDeletionBehavior getActivityDeletionBehavior() {
-        return activityDeletionBehavior;
-    }
 
-    public void setActivityDeletionBehavior(ActivityDeletionBehavior activityDeletionBehavior) {
-        this.activityDeletionBehavior = activityDeletionBehavior;
-    }
-
-    public PaymentDeletionBehavior getPaymentDeletionBehavior() {
-        return paymentDeletionBehavior;
-    }
-
-    public void setPaymentDeletionBehavior(PaymentDeletionBehavior paymentDeletionBehavior) {
-        this.paymentDeletionBehavior = paymentDeletionBehavior;
-    }
-
+    @Override
     public ProfileDeletionBehavior getProfileDeletionBehavior() {
-        return profileDeletionBehavior;
+        return null;
     }
 
+    @Override
+    public PaymentDeletionBehavior getPaymentDeletionBehavior() {
+        return null;
+    }
+
+    @Override
+    public ActivityDeletionBehavior getActivityDeletionBehavior() {
+        return null;
+    }
+
+    @Override
     public PostDeletionBehavior getPostDeletionBehavior() {
-        return postDeletionBehavior;
-    }
-
-    public void setPostDeletionBehavior(PostDeletionBehavior postDeletionBehavior) {
-        this.postDeletionBehavior = postDeletionBehavior;
-    }
-
-    public void setProfileDeletionBehavior(ProfileDeletionBehavior profileDeletionBehavior) {
-        this.profileDeletionBehavior = profileDeletionBehavior;
+        return null;
     }
 }

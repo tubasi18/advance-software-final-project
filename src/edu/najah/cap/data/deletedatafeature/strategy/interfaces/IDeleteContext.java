@@ -14,11 +14,11 @@ public interface IDeleteContext {
 
     PostDeletionBehavior getPostDeletionBehavior();
 
-    void setActivityDeletionBehavior(ActivityDeletionBehavior activityDeletionBehavior);
-
-    void setPostDeletionBehavior(PostDeletionBehavior postDeletionBehavior);
-
-    void setPaymentDeletionBehavior(PaymentDeletionBehavior paymentDeletionBehavior);
-
-    void setProfileDeletionBehavior(ProfileDeletionBehavior profileDeletionBehavior);
+//    void setActivityDeletionBehavior(ActivityDeletionBehavior activityDeletionBehavior);
+//
+//    void setPostDeletionBehavior(PostDeletionBehavior postDeletionBehavior);
+//
+//    void setPaymentDeletionBehavior(PaymentDeletionBehavior paymentDeletionBehavior);
+//
+//    void setProfileDeletionBehavior(ProfileDeletionBehavior profileDeletionBehavior);
 }
