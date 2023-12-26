@@ -17,6 +17,7 @@ import edu.najah.cap.posts.Post;
 import edu.najah.cap.posts.PostService;
 
 import java.time.Instant;
+import java.util.Scanner;
 
 public class Application {
 
@@ -24,15 +25,21 @@ public class Application {
     private static final IPayment paymentService = new PaymentService();
     private static final IUserService userService = new UserService();
     private static final IPostService postService = new PostService();
-
+    private static String loginUserName;
 
     public static void main(String[] args) {
         generateRandomData();
         Instant start = Instant.now();
         System.out.println("Application Started: " + start);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your username: ");
+        System.out.println("Note: You can use any of the following usernames: user0, user1, user2, user3, .... user99");
+        String userName = scanner.nextLine();
+        setLoginUserName(userName);
         //TODO Your application starts here. Do not Change the existing code
 
-        UserProfile user1 = userService.getUser("user8");
+        UserProfile user1 = userService.getUser(loginUserName);
         System.out.println(user1.getUserType());
         ExportData exportData = new ExportData(user1, EnumAction.DOWNLOAD_DIRECTLY);
         exportData.exportData();
@@ -61,7 +68,13 @@ public class Application {
 
     private static void generatePayment(int i) {
         for (int j = 0; j < 100; j++) {
-            paymentService.pay(new Transaction("user" + i, i * j, "description" + i + "." + j));
+            try {
+                if (userService.getUser("user" + i).getUserType() == UserType.PREMIUM_USER) {
+                    paymentService.pay(new Transaction("user" + i, i * j, "description" + i + "." + j));
+                }
+            } catch (Exception e) {
+                System.err.println("Error while generating post for user" + i);
+            }
         }
     }
 
@@ -99,5 +112,8 @@ public class Application {
         } else {
             return UserType.PREMIUM_USER;
         }
+    }
+    private static void setLoginUserName(String loginUserName) {
+        Application.loginUserName = loginUserName;
     }
 }
