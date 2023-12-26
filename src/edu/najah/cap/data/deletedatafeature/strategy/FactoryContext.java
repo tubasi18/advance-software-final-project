@@ -8,11 +8,21 @@ import edu.najah.cap.data.deletedatafeature.strategy.postdeletion.PostDeletion;
 import edu.najah.cap.data.deletedatafeature.strategy.postdeletion.PostDeletionBehavior;
 import edu.najah.cap.data.deletedatafeature.strategy.profiledeltion.ProfileDeletion;
 import edu.najah.cap.data.deletedatafeature.strategy.profiledeltion.ProfileDeletionBehavior;
+<<<<<<< Updated upstream
+=======
+import edu.najah.cap.exceptions.BadRequestException;
+import edu.najah.cap.exceptions.NotFoundException;
+import edu.najah.cap.exceptions.SystemBusyException;
+>>>>>>> Stashed changes
 import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.iam.UserType;
 
 public class FactoryContext {
+<<<<<<< Updated upstream
     public void factoryProcess(UserProfile user, boolean isHardDelete) {
+=======
+    public static void factoryProcess(UserProfile user, boolean isHardDelete) throws SystemBusyException, NotFoundException, BadRequestException {
+>>>>>>> Stashed changes
         PostDeletionBehavior postDeletion =  new PostDeletion();
         ActivityDeletionBehavior activityDeletion = (user.getUserType() == UserType.REGULAR_USER || user.getUserType() == UserType.PREMIUM_USER) ? new ActivityDeletion() : null;
         PaymentDeletionBehavior paymentDeletion = (user.getUserType() == UserType.PREMIUM_USER) ? new PaymentDeletion() : null;

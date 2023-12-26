@@ -3,6 +3,9 @@ package edu.najah.cap.data.exportdatafeature.factory.implementation;
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.data.exportdatafeature.factory.interfaces.ICreateDataObjectUser;
+import edu.najah.cap.exceptions.BadRequestException;
+import edu.najah.cap.exceptions.NotFoundException;
+import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.posts.IPostService;
@@ -21,13 +24,13 @@ public class RegularUser extends ICreateDataObjectUser {
     }
 
     @Override
-    public String getDataUser() {
+    public String getDataUser() throws SystemBusyException, BadRequestException, NotFoundException {
         return super.getDataProfile()
                 + super.getPostsDetails()
                 + getActivityData();
     }
 
-    public String getActivityData() {
+    public String getActivityData() throws SystemBusyException, BadRequestException, NotFoundException {
         List<UserActivity> userActivities =
                 userActivityService.getUserActivity(super.getUserName());
 

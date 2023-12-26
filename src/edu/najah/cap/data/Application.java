@@ -3,8 +3,14 @@ package edu.najah.cap.data;
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.activity.UserActivityService;
+import edu.najah.cap.data.Helpers.DeletedUsernamesTracker;
+import edu.najah.cap.data.deletedatafeature.strategy.FactoryContext;
 import edu.najah.cap.data.exportdatafeature.ExportData;
 import edu.najah.cap.data.exportdatafeature.strategy.enumaction.EnumAction;
+import edu.najah.cap.exceptions.BadRequestException;
+import edu.najah.cap.exceptions.FileFiledException;
+import edu.najah.cap.exceptions.SystemBusyException;
+import edu.najah.cap.exceptions.Util;
 import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.iam.UserService;
@@ -16,7 +22,9 @@ import edu.najah.cap.posts.IPostService;
 import edu.najah.cap.posts.Post;
 import edu.najah.cap.posts.PostService;
 
+import java.io.IOException;
 import java.time.Instant;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Application {
@@ -36,13 +44,27 @@ public class Application {
         System.out.println("Enter your username: ");
         System.out.println("Note: You can use any of the following usernames: user0, user1, user2, user3, .... user99");
         String userName = scanner.nextLine();
-        setLoginUserName(userName);
         //TODO Your application starts here. Do not Change the existing code
+        try {
+            Util.validateUserName(userName);
+            setLoginUserName(userName);
+            UserProfile user1 = userService.getUser(loginUserName);
+            System.out.println(user1.getUserType());
+              ExportData exportData = new ExportData(user1, EnumAction.DOWNLOAD_DIRECTLY);
+            exportData.exportData();
+            FactoryContext.factoryProcess(user1,true);
+            for (Map.Entry<String, UserProfile> entry : userService.getUsers().entrySet()) {
+                System.out.println("Username: " + entry.getKey());
+            }
+            System.out.println("----------------");
+            System.out.println( DeletedUsernamesTracker.getArchivedUsernames());
+       } catch (SystemBusyException | BadRequestException | FileFiledException e) {
+         System.out.println(e.getMessage());
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
-        UserProfile user1 = userService.getUser(loginUserName);
-        System.out.println(user1.getUserType());
-        ExportData exportData = new ExportData(user1, EnumAction.DOWNLOAD_DIRECTLY);
-        exportData.exportData();
+
 
         //TODO Your application ends here. Do not Change the existing code
         Instant end = Instant.now();

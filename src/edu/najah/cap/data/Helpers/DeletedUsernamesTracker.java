@@ -12,4 +12,11 @@ public class DeletedUsernamesTracker {
     public static void archiveUsername(String userName) {
         archivedUsernames.add(userName);
     }
+<<<<<<< Updated upstream
+=======
+
+    public static List<String> getArchivedUsernames() {
+        return archivedUsernames;
+    }
+>>>>>>> Stashed changes
 }

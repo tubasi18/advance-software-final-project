@@ -1,5 +1,8 @@
 package edu.najah.cap.data.exportdatafeature.factory.interfaces;
 
+import edu.najah.cap.exceptions.BadRequestException;
+import edu.najah.cap.exceptions.NotFoundException;
+import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.posts.IPostService;
@@ -42,7 +45,7 @@ public abstract class ICreateDataObjectUser  {
         this.postService = postService;
     }
 
-    public String getPostsDetails() {
+    public String getPostsDetails() throws SystemBusyException, BadRequestException, NotFoundException {
         List<Post> posts = getPostService()
                 .getPosts(getUserProfile()
                         .getUserName());
@@ -66,5 +69,5 @@ public abstract class ICreateDataObjectUser  {
         return getUserProfile().getUserName();
     }
 
-    public abstract String getDataUser();
+    public abstract String getDataUser() throws SystemBusyException, BadRequestException, NotFoundException;
 }

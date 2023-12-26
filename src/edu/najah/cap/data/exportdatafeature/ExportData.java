@@ -4,6 +4,7 @@ import edu.najah.cap.data.collectorcomponent.DataCollector;
 import edu.najah.cap.data.exportdatafeature.converter.ConvertString;
 import edu.najah.cap.data.exportdatafeature.strategy.StrategyAction;
 import edu.najah.cap.data.exportdatafeature.strategy.enumaction.EnumAction;
+import edu.najah.cap.exceptions.*;
 import edu.najah.cap.iam.UserProfile;
 
 
@@ -17,7 +18,7 @@ public class ExportData {
         this.action = action;
     }
 
-    public void exportData() {
+    public void exportData() throws FileFiledException, SystemBusyException, BadRequestException, NotFoundException, NullValueException {
         String data = dataCollector.collectData();
 
         ConvertString convertString = new ConvertString();
