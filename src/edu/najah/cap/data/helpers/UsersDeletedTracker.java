@@ -1,10 +1,11 @@
-package edu.najah.cap.data.Helpers;
+package edu.najah.cap.data.helpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeletedUsernamesTracker {
-    public static List<String> archivedUsernames = new ArrayList<>();
+public class UsersDeletedTracker {
+    private  UsersDeletedTracker(){}
+    private static final  List<String> archivedUsernames = new ArrayList<>();
 
     public static boolean isUserDeleted(String userName) {
         return archivedUsernames.contains(userName);

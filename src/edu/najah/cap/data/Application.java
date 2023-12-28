@@ -3,13 +3,10 @@ package edu.najah.cap.data;
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.activity.UserActivityService;
-import edu.najah.cap.data.Helpers.DeletedUsernamesTracker;
 import edu.najah.cap.data.deletedatafeature.MangerDeletion;
-import edu.najah.cap.data.deletedatafeature.strategy.FactoryContext;
 import edu.najah.cap.data.exportdatafeature.ExportData;
-import edu.najah.cap.data.exportdatafeature.strategy.enumaction.EnumAction;
+import edu.najah.cap.data.enums.EnumAction;
 import edu.najah.cap.exceptions.BadRequestException;
-import edu.najah.cap.exceptions.FileFiledException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.exceptions.Util;
 import edu.najah.cap.iam.IUserService;
@@ -33,42 +30,31 @@ public class Application {
     private static final IPayment paymentService = new PaymentService();
     private static final IUserService userService = new UserService();
     private static final IPostService postService = new PostService();
+
     private static String loginUserName;
 
     public static void main(String[] args) {
         generateRandomData();
         Instant start = Instant.now();
         System.out.println("Application Started: " + start);
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your username: ");
         System.out.println("Note: You can use any of the following usernames: user0, user1, user2, user3, .... user99");
-        String userName = scanner.nextLine();
+//          String userName = scanner.next();
+        String userName = "user9";
+        setLoginUserName(userName);
         //TODO Your application starts here. Do not Change the existing code
         try {
-            Util.validateUserName(userName);
-            setLoginUserName(userName);
+
             UserProfile user = userService.getUser(loginUserName);
             System.out.println(user.getUserType());
-//              ExportData exportData = new Exp7ortData(user1, EnumAction.DOWNLOAD_DIRECTLY);
-//            exportData.exportData();
-
-            System.out.println( "Activities Before: " + Services.getUserActivityServiceInstance().getUserActivity(loginUserName).size());
-            System.out.println( "Posts Before:" + Services.getUserPostServiceInstance().getPosts(loginUserName).size());
-            System.out.println( "Transactions Before:" + Services.getUserPaymentServiceInstance().getBalance(loginUserName));
-            System.out.println( "Users Before:" + Services.getUserServiceInstance().getUsers().size());
+           ExportData exportData = new ExportData();
+         exportData.exportData(user, EnumAction.DOWNLOAD_DIRECTLY);
+           MangerDeletion mangerDeletion = new MangerDeletion(user,false);
+           mangerDeletion.delete();
 
 
-            MangerDeletion mangerDeletion = new MangerDeletion(user,true);
-            mangerDeletion.delete();
-
-
-            System.out.println( "Activities After: " + Services.getUserActivityServiceInstance().getUserActivity(loginUserName).size());
-            System.out.println( "Posts After:" + Services.getUserPostServiceInstance().getPosts(loginUserName).size());
-            System.out.println( "Transactions After:" + Services.getUserPaymentServiceInstance().getBalance(loginUserName));
-            System.out.println( "Users After:" + Services.getUserServiceInstance().getUsers().size());
-
-        } catch (SystemBusyException | BadRequestException  e) {
+        } catch (SystemBusyException | BadRequestException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -76,8 +62,23 @@ public class Application {
 
 
 
+        Map<Thread, StackTraceElement[]> allThreads = Thread.getAllStackTraces();
+        System.out.println(allThreads.size());
+        // Wait for all threads to finish
+        for (Thread thread : allThreads.keySet()) {
+            // Filter threads based on your criteria
+                if (thread.getName().startsWith("pool-")) {
+
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         //TODO Your application ends here. Do not Change the existing code
         Instant end = Instant.now();
+
         System.out.println("Application Ended: " + end);
     }
 
@@ -94,6 +95,7 @@ public class Application {
         Util.setSkipValidation(false);
     }
 
+
     private static void generateActivity(int i) {
         for (int j = 0; j < 100; j++) {
             try {
@@ -106,6 +108,7 @@ public class Application {
             userActivityService.addUserActivity(new UserActivity("user" + i, "activity" + i + "." + j, Instant.now().toString()));
         }
     }
+
     private static void generatePayment(int i) {
         for (int j = 0; j < 100; j++) {
             try {
@@ -153,6 +156,11 @@ public class Application {
             return UserType.PREMIUM_USER;
         }
     }
+
+    public static String getLoginUserName() {
+        return loginUserName;
+    }
+
     private static void setLoginUserName(String loginUserName) {
         Application.loginUserName = loginUserName;
     }

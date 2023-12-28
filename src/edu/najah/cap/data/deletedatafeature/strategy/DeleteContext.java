@@ -25,7 +25,7 @@ public class DeleteContext  {
         this.postDeletionBehavior = postDeletionBehavior;
     }
 
-    public void executeDeletion(UserProfile user, boolean isHardDelete) throws SystemBusyException, NotFoundException, BadRequestException {
+    public void executeDeletion(UserProfile user, boolean isHardDelete) throws SystemBusyException, BadRequestException, NotFoundException {
         if (postDeletionBehavior != null) {
             postDeletionBehavior.deletePost(user);
         }
@@ -35,7 +35,7 @@ public class DeleteContext  {
         if (paymentDeletionBehavior != null) {
             paymentDeletionBehavior.deletePayment(user);
         }
-        if (profileDeletionBehavior != null) {
+        if (isHardDelete && profileDeletionBehavior != null) {
             profileDeletionBehavior.deleteProfile(user);
         }
     }

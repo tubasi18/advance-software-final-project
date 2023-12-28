@@ -1,42 +1,33 @@
-package edu.najah.cap.data.exportdatafeature.factory.implementation;
+package edu.najah.cap.data.exportdatafeature.userservices.impl;
 
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
-import edu.najah.cap.data.exportdatafeature.factory.interfaces.ICreateDataObjectUser;
+import edu.najah.cap.data.exportdatafeature.userservices.intf.ICreateDataObjectUser;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.iam.UserProfile;
-import edu.najah.cap.payment.IPayment;
 import edu.najah.cap.posts.IPostService;
 
 import java.util.List;
 
-public class PremiumUser extends ICreateDataObjectUser {
+public class RegularUserServices extends ICreateDataObjectUser {
     IUserActivityService userActivityService;
-    IPayment paymentService;
 
-    public PremiumUser(UserProfile userProfile,
-                       IUserActivityService userActivityService,
-                       IPayment paymentService,
-                       IUserService userService,
-                       IPostService postService) {
+    public RegularUserServices(UserProfile userProfile,
+                               IPostService postService,
+                               IUserService userService,
+                               IUserActivityService userActivityService) {
         super(userService, userProfile, postService);
         this.userActivityService = userActivityService;
-        this.paymentService = paymentService;
-
     }
 
     @Override
     public String getDataUser() throws SystemBusyException, BadRequestException, NotFoundException {
-
-                 return super.getDataProfile()
-                    + super.getPostsDetails()
-                    + "Activity Data: " + getActivityData() +
-                    "/"
-                    + "Payment Data: " + getPaymentData();
-
+        return super.getDataProfile()
+                + super.getPostsDetails()
+                + getActivityData();
     }
 
     public String getActivityData() throws SystemBusyException, BadRequestException, NotFoundException {
@@ -50,9 +41,5 @@ public class PremiumUser extends ICreateDataObjectUser {
                     .append("Activity Type: ").append(userActivity.getActivityType()).append("\n\n");
         }
         return result.toString();
-    }
-
-    public Double getPaymentData() {
-        return paymentService.getBalance(super.getUserName());
     }
 }

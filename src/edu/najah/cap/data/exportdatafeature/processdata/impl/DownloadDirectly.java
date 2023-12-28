@@ -1,7 +1,7 @@
-package edu.najah.cap.data.exportdatafeature.strategy.implementation;
+package edu.najah.cap.data.exportdatafeature.processdata.impl;
 
-import edu.najah.cap.data.exportdatafeature.strategy.interfaces.IActionable;
-import edu.najah.cap.data.exportdatafeature.strategy.interfaces.IFileProcess;
+import edu.najah.cap.data.exportdatafeature.processdata.intf.IActionable;
+import edu.najah.cap.data.exportdatafeature.processdata.intf.IFileProcess;
 import edu.najah.cap.exceptions.FileFiledException;
 
 

@@ -43,8 +43,4 @@ public class UserService implements IUserService {
         }
         return users.get(userName);
     }
-    @Override
-    public  Map<String, UserProfile> getUsers() {
-        return users;
-    }
 }

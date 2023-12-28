@@ -1,4 +1,4 @@
-package edu.najah.cap.data;
+package edu.najah.cap.data.helpers;
 
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivityService;
@@ -10,6 +10,7 @@ import edu.najah.cap.posts.IPostService;
 import edu.najah.cap.posts.PostService;
 
 public class Services {
+    private Services(){}
     private static IUserService userService;
     private static IUserActivityService userActivityService;
     private static IPostService postService;

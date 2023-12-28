@@ -1,7 +1,7 @@
-package edu.najah.cap.data.exportdatafeature.strategy.implementation;
+package edu.najah.cap.data.exportdatafeature.processdata.impl;
 
 
-import edu.najah.cap.data.exportdatafeature.strategy.interfaces.IFileProcess;
+import edu.najah.cap.data.exportdatafeature.processdata.intf.IFileProcess;
 import edu.najah.cap.exceptions.FileFiledException;
 
 import java.io.*;
@@ -14,20 +14,6 @@ public class FileProcessor implements IFileProcess {
         this.zipFileName = zipFileName;
     }
 
-//    @Override
-//    public void actionFileProcess(byte[] data) {
-//        File directory = new File(outputDirectory);
-//        if (!directory.exists()) {
-//            directory.mkdirs();
-//        }
-//        String outputPath = outputDirectory + File.separator + zipFileName;
-//        try (FileOutputStream fileOutputStream = new FileOutputStream(outputPath)) {
-//            fileOutputStream.write(data);
-//            System.out.println("ZIP file saved successfully: " + outputPath);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
     @Override
 public void actionFileProcess(byte[] data) throws FileFiledException {
 

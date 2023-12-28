@@ -1,8 +1,8 @@
-package edu.najah.cap.data.exportdatafeature.strategy;
+package edu.najah.cap.data.exportdatafeature.processdata.strategy;
 
-import edu.najah.cap.data.exportdatafeature.strategy.implementation.DownloadDirectly;
-import edu.najah.cap.data.exportdatafeature.strategy.implementation.UploadToStorage;
-import edu.najah.cap.data.exportdatafeature.strategy.enumaction.EnumAction;
+import edu.najah.cap.data.exportdatafeature.processdata.impl.DownloadDirectly;
+import edu.najah.cap.data.exportdatafeature.processdata.impl.UploadToStorage;
+import edu.najah.cap.data.enums.EnumAction;
 import edu.najah.cap.exceptions.FileFiledException;
 
 public class StrategyAction {

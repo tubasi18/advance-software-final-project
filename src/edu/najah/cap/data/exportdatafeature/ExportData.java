@@ -1,43 +1,43 @@
 package edu.najah.cap.data.exportdatafeature;
 
-import edu.najah.cap.data.collectorcomponent.DataCollector;
-import edu.najah.cap.data.exportdatafeature.converter.ConvertString;
-import edu.najah.cap.data.exportdatafeature.strategy.StrategyAction;
-import edu.najah.cap.data.exportdatafeature.strategy.enumaction.EnumAction;
+import edu.najah.cap.data.exportdatafeature.collector.DataCollector;
+import edu.najah.cap.data.exportdatafeature.collector.IDataCollector;
+import edu.najah.cap.data.enums.ConverterType;
+import edu.najah.cap.data.exportdatafeature.converter.factory.FactoryConverter;
+import edu.najah.cap.data.exportdatafeature.converter.intf.IConverter;
+import edu.najah.cap.data.exportdatafeature.processdata.strategy.StrategyAction;
+import edu.najah.cap.data.enums.EnumAction;
 import edu.najah.cap.exceptions.*;
 import edu.najah.cap.iam.UserProfile;
+import edu.najah.cap.iam.UserType;
+
+import java.util.List;
 
 
 public class ExportData {
-    DataCollector dataCollector;
-    EnumAction action;
+    IDataCollector dataCollector;
 
-    public ExportData(UserProfile user , EnumAction action) {
 
-        this.dataCollector = new DataCollector(user);
-        this.action = action;
-    }
-
-    public void exportData() throws FileFiledException, SystemBusyException, BadRequestException, NotFoundException, NullValueException {
-        String data = dataCollector.collectData();
-
-        ConvertString convertString = new ConvertString();
+    public void exportData(UserProfile user , EnumAction action) throws FileFiledException, SystemBusyException, BadRequestException, NotFoundException, NullValueException, InvalidUserTypeException {
+        this.dataCollector = new DataCollector();
+        String data = dataCollector.collectData(user);
 
         String[] parts = data.split("/");
-
+        List<String> stringList = List.of(parts);
         byte[] zipData;
 
-        if (parts.length == 2) {
-            byte[] pdfData1 = convertString.convertTextToPDF(parts[0]);
-            byte[] pdfData2 = convertString.convertTextToPDF(parts[1]);
-            zipData = convertString.convertPDFsToZip(pdfData1, pdfData2);
+        if (user.getUserType() == UserType.PREMIUM_USER) {
+           IConverter converter =  FactoryConverter.createConverter(ConverterType.TOZIP);
+            zipData = converter.convert(stringList);
             System.out.println("PDF files and Zip file created successfully.");
         } else {
-            byte[] pdfData = convertString.convertTextToPDF(data);
-            zipData = convertString.convertPDFToZip(pdfData);
-            System.out.println("PDF file and Zip file created successfully.");
+         IConverter converter = FactoryConverter.createConverter(ConverterType.TOZIP);
+            zipData = converter.convert(List.of(parts[0]));
         }
 
+
+
+         System.out.println("PDF file and Zip file created successfully.");
 
 
          StrategyAction.typeAction(action,zipData);

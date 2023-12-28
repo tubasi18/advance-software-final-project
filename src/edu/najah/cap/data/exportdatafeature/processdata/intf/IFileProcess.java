@@ -1,4 +1,4 @@
-package edu.najah.cap.data.exportdatafeature.strategy.interfaces;
+package edu.najah.cap.data.exportdatafeature.processdata.intf;
 
 import edu.najah.cap.exceptions.FileFiledException;
 

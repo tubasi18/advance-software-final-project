@@ -30,8 +30,6 @@ public class FactoryContext {
                 activityDeletion = new ActivityDeletion();
                 paymentDeletion = new PaymentDeletion();
                 break;
-            default:
-                throw new IllegalArgumentException("Unsupported user type.");
         }
         if (isHardDelete) {
             profileDeletion = new ProfileDeletion();

@@ -1,4 +1,4 @@
-package edu.najah.cap.data.exportdatafeature.factory.interfaces;
+package edu.najah.cap.data.exportdatafeature.userservices.intf;
 
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
@@ -15,28 +15,15 @@ public abstract class ICreateDataObjectUser  {
     UserProfile userProfile;
     IPostService postService;
 
-    public IUserService getUserService() {
-        return userService;
-    }
 
-    public void setUserService(IUserService userService) {
-        this.userService = userService;
-    }
 
     public UserProfile getUserProfile() {
         return userProfile;
     }
 
-    public void setUserProfile(UserProfile userProfile) {
-        this.userProfile = userProfile;
-    }
 
     public IPostService getPostService() {
         return postService;
-    }
-
-    public void setPostService(IPostService postService) {
-        this.postService = postService;
     }
 
     protected ICreateDataObjectUser(IUserService userService, UserProfile userProfile, IPostService postService) {

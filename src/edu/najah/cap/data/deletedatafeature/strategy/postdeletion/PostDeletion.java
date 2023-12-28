@@ -1,6 +1,7 @@
 package edu.najah.cap.data.deletedatafeature.strategy.postdeletion;
 
-import edu.najah.cap.data.Services;
+import edu.najah.cap.activity.UserActivity;
+import edu.najah.cap.data.helpers.Services;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
@@ -8,6 +9,8 @@ import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.posts.Post;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class PostDeletion implements PostDeletionBehavior {
 
@@ -15,10 +18,22 @@ public class PostDeletion implements PostDeletionBehavior {
 
     public void deletePost(UserProfile user) throws SystemBusyException, BadRequestException, NotFoundException {
         List <Post> userPosts= Services.getUserPostServiceInstance().getPosts(user.getUserName());
-        for(int i=userPosts.size()-1; i>=0; i--){
-            Services.getUserPostServiceInstance().deletePost(user.getUserName(),userPosts.get(i).getId());
-        }
 
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+
+        try {
+            for (Post activity : userPosts) {
+                executor.submit(() -> {
+                    try {
+                        Services.getUserPostServiceInstance().deletePost(user.getUserName(),activity.getId());
+                    } catch (NotFoundException | SystemBusyException | BadRequestException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        } finally {
+            executor.shutdown();
+        }
     }
 }
 
