@@ -83,6 +83,7 @@ public class Application {
 
 
     private static void generateRandomData() {
+        Util.setSkipValidation(true);
         for (int i = 0; i < 100; i++) {
             generateUser(i);
             generatePost(i);
@@ -90,6 +91,7 @@ public class Application {
             generateActivity(i);
         }
         System.out.println("Data Generation Completed");
+        Util.setSkipValidation(false);
     }
 
     private static void generateActivity(int i) {
