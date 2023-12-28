@@ -16,12 +16,8 @@ public class ActivityDeletion implements ActivityDeletionBehavior {
     public void deleteActivities(UserProfile user) throws SystemBusyException, BadRequestException, NotFoundException {
 
         List<UserActivity> userActivities = Services.getUserActivityServiceInstance().getUserActivity(user.getUserName());
-        Iterator<UserActivity> iterator = userActivities.iterator();
-
-        while (iterator.hasNext()) {
-            UserActivity activity = iterator.next();
-            Services.getUserActivityServiceInstance().removeUserActivity(user.getUserName(), activity.getId());
-            iterator.remove();
+        for(int i=userActivities.size() - 1 ; i >=0 ;i--){
+            Services.getUserActivityServiceInstance().removeUserActivity(user.getUserName(),userActivities.get(i).getId());
         }
     }
 }

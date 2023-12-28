@@ -14,8 +14,8 @@ public class PaymentDeletion implements PaymentDeletionBehavior {
     public void deletePayment(UserProfile user) throws SystemBusyException, BadRequestException, NotFoundException {
 
         List<Transaction> userTransactionList = Services.getUserPaymentServiceInstance().getTransactions(user.getUserName());
-        for (Transaction transaction : userTransactionList) {
-            Services.getUserPaymentServiceInstance().removeTransaction(transaction.getUserName(), transaction.getId());
+        for (int i = userTransactionList.size() - 1 ; i >= 0 ; i--) {
+            Services.getUserPaymentServiceInstance().removeTransaction(user.getUserName(), userTransactionList.get(i).getId());
         }
     }
 }

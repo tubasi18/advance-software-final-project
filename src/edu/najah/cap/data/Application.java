@@ -4,6 +4,7 @@ import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.activity.UserActivityService;
 import edu.najah.cap.data.Helpers.DeletedUsernamesTracker;
+import edu.najah.cap.data.deletedatafeature.MangerDeletion;
 import edu.najah.cap.data.deletedatafeature.strategy.FactoryContext;
 import edu.najah.cap.data.exportdatafeature.ExportData;
 import edu.najah.cap.data.exportdatafeature.strategy.enumaction.EnumAction;
@@ -47,19 +48,29 @@ public class Application {
         try {
             Util.validateUserName(userName);
             setLoginUserName(userName);
-            UserProfile user1 = userService.getUser(loginUserName);
-            System.out.println(user1.getUserType());
-              ExportData exportData = new ExportData(user1, EnumAction.DOWNLOAD_DIRECTLY);
-            exportData.exportData();
-            FactoryContext.factoryProcess(user1,false);
-            for (Map.Entry<String, UserProfile> entry : userService.getUsers().entrySet()) {
-                System.out.println("Username: " + entry.getKey());
-            }
-            System.out.println("----------------");
-            System.out.println( DeletedUsernamesTracker.getArchivedUsernames());
-       } catch (SystemBusyException | BadRequestException | FileFiledException e) {
-         System.out.println(e.getMessage());
-        } catch (Exception e){
+            UserProfile user = userService.getUser(loginUserName);
+            System.out.println(user.getUserType());
+//              ExportData exportData = new Exp7ortData(user1, EnumAction.DOWNLOAD_DIRECTLY);
+//            exportData.exportData();
+
+            System.out.println( "Activities Before: " + Services.getUserActivityServiceInstance().getUserActivity(loginUserName).size());
+            System.out.println( "Posts Before:" + Services.getUserPostServiceInstance().getPosts(loginUserName).size());
+            System.out.println( "Transactions Before:" + Services.getUserPaymentServiceInstance().getBalance(loginUserName));
+            System.out.println( "Users Before:" + Services.getUserServiceInstance().getUsers().size());
+
+
+            MangerDeletion mangerDeletion = new MangerDeletion(user,true);
+            mangerDeletion.delete();
+
+
+            System.out.println( "Activities After: " + Services.getUserActivityServiceInstance().getUserActivity(loginUserName).size());
+            System.out.println( "Posts After:" + Services.getUserPostServiceInstance().getPosts(loginUserName).size());
+            System.out.println( "Transactions After:" + Services.getUserPaymentServiceInstance().getBalance(loginUserName));
+            System.out.println( "Users After:" + Services.getUserServiceInstance().getUsers().size());
+
+        } catch (SystemBusyException | BadRequestException  e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -83,10 +94,16 @@ public class Application {
 
     private static void generateActivity(int i) {
         for (int j = 0; j < 100; j++) {
+            try {
+                if(UserType.NEW_USER.equals(userService.getUser("user" + i).getUserType())) {
+                    continue;
+                }
+            } catch (Exception e) {
+                System.err.println("Error while generating activity for user" + i);
+            }
             userActivityService.addUserActivity(new UserActivity("user" + i, "activity" + i + "." + j, Instant.now().toString()));
         }
     }
-
     private static void generatePayment(int i) {
         for (int j = 0; j < 100; j++) {
             try {
