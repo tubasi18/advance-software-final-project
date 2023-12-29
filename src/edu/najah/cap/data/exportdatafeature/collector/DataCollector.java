@@ -7,11 +7,9 @@ import edu.najah.cap.iam.UserProfile;
 
 
 public class DataCollector implements IDataCollector {
-
-
    public String collectData(UserProfile user) throws SystemBusyException, BadRequestException, NotFoundException, NullValueException, InvalidUserTypeException {
 
-           ICreateDataObjectUser userData = FactoryUserType.creationUserDataObject(user);
+       ICreateDataObjectUser userData = FactoryUserType.creationUserDataObject(user);
        if(userData == null){
            throw new NullValueException(" Null value for User");
        }

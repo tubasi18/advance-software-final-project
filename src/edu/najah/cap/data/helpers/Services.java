@@ -10,16 +10,24 @@ import edu.najah.cap.posts.IPostService;
 import edu.najah.cap.posts.PostService;
 
 public class Services {
-    private Services(){}
     private static IUserService userService;
     private static IUserActivityService userActivityService;
     private static IPostService postService;
     private static IPayment paymentService;
 
+    public static void setServices(IUserService userService,
+                                   IUserActivityService userActivityService,
+                                   IPostService postService,
+                                   IPayment paymentService) {
+        Services.userService = userService;
+        Services.userActivityService = userActivityService;
+        Services.paymentService = paymentService;
+        Services.postService = postService;
+    }
+
     public static synchronized IUserService getUserServiceInstance() {
         if (userService == null) {
             userService = new UserService();
-
         }
         return userService;
     }

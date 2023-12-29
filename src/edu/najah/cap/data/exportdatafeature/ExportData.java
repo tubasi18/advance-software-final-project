@@ -13,35 +13,30 @@ import edu.najah.cap.iam.UserType;
 
 import java.util.List;
 
-
 public class ExportData {
     IDataCollector dataCollector;
 
-
-    public void exportData(UserProfile user , EnumAction action) throws FileFiledException, SystemBusyException, BadRequestException, NotFoundException, NullValueException, InvalidUserTypeException {
-        this.dataCollector = new DataCollector();
-        String data = dataCollector.collectData(user);
-
-        String[] parts = data.split("/");
-        List<String> stringList = List.of(parts);
+    public void exportData(UserProfile user, EnumAction action) throws FileFiledException, SystemBusyException, BadRequestException, NotFoundException, NullValueException, InvalidUserTypeException {
+        List<String> data = getData(user);
         byte[] zipData;
 
         if (user.getUserType() == UserType.PREMIUM_USER) {
-           IConverter converter =  FactoryConverter.createConverter(ConverterType.TOZIP);
-            zipData = converter.convert(stringList);
+            IConverter converter = FactoryConverter.createConverter(ConverterType.TOZIP);
+            zipData = converter.convert(data);
             System.out.println("PDF files and Zip file created successfully.");
         } else {
-         IConverter converter = FactoryConverter.createConverter(ConverterType.TOZIP);
-            zipData = converter.convert(List.of(parts[0]));
+            IConverter converter = FactoryConverter.createConverter(ConverterType.TOZIP);
+            zipData = converter.convert(List.of(data.get(0)));
         }
 
+        System.out.println("PDF file and Zip file created successfully.");
+        StrategyAction.typeAction(action, zipData);
+    }
 
-
-         System.out.println("PDF file and Zip file created successfully.");
-
-
-         StrategyAction.typeAction(action,zipData);
-
-
+    public List<String> getData(UserProfile user) throws SystemBusyException, InvalidUserTypeException, BadRequestException, NotFoundException, NullValueException {
+        this.dataCollector = new DataCollector();
+        String data = dataCollector.collectData(user);
+        String[] parts = data.split("/");
+        return List.of(parts);
     }
 }
