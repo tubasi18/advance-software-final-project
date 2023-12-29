@@ -1,6 +1,6 @@
 package edu.najah.cap.data.exportdatafeature.userservices.factory;
 import edu.najah.cap.data.helpers.Services;
-import edu.najah.cap.data.exportdatafeature.userservices.intf.ICreateDataObjectUser;
+import edu.najah.cap.data.exportdatafeature.userservices.abst.ICreateDataObjectUser;
 import edu.najah.cap.data.exportdatafeature.userservices.impl.NewUserServices;
 import edu.najah.cap.data.exportdatafeature.userservices.impl.PremiumUserServices;
 import edu.najah.cap.data.exportdatafeature.userservices.impl.RegularUserServices;

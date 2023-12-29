@@ -1,4 +1,4 @@
-package edu.najah.cap.data.exportdatafeature.userservices.intf;
+package edu.najah.cap.data.exportdatafeature.userservices.abst;
 
 import edu.najah.cap.data.helpers.Services;
 import edu.najah.cap.exceptions.BadRequestException;

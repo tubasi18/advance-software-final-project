@@ -2,13 +2,13 @@ package edu.najah.cap.data.exportdatafeature.userservices.impl;
 
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
-import edu.najah.cap.data.exportdatafeature.userservices.intf.ICreateDataObjectUser;
+import edu.najah.cap.data.exportdatafeature.userservices.abst.ICreateDataObjectUser;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.iam.IUserService;
-import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.payment.IPayment;
+import edu.najah.cap.payment.Transaction;
 import edu.najah.cap.posts.IPostService;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class PremiumUserServices extends ICreateDataObjectUser {
                                IPayment paymentService,
                                IUserService userService,
                                IPostService postService) {
-        super(userName,userService, postService);
+        super(userName, userService, postService);
         this.userActivityService = userActivityService;
         this.paymentService = paymentService;
 
@@ -31,11 +31,11 @@ public class PremiumUserServices extends ICreateDataObjectUser {
     @Override
     public String getDataUser() throws SystemBusyException, BadRequestException, NotFoundException {
 
-                 return super.getDataProfile()
-                    + super.getPostsDetails()
-                    + "Activity Data: " + getActivityData() +
-                    "/"
-                    + "Payment Data: " + getPaymentData();
+        return super.getDataProfile()
+                + super.getPostsDetails()
+                + "Activity Data: " + getActivityData() +
+                "/"
+                + "Payment Data: " + getPaymentData();
 
     }
 
@@ -52,7 +52,23 @@ public class PremiumUserServices extends ICreateDataObjectUser {
         return result.toString();
     }
 
-    public Double getPaymentData() throws SystemBusyException, NotFoundException, BadRequestException {
+    public String getPaymentData() throws SystemBusyException, NotFoundException, BadRequestException {
+        return "\n" + "Balance: " + getBalance().toString() + "\n" + "Transactions: " + "\n" + getTransactionData();
+    }
+
+    public String getTransactionData() throws SystemBusyException, NotFoundException, BadRequestException {
+        List<Transaction> transactions = paymentService.getTransactions(super.getUserName());
+        StringBuilder result = new StringBuilder();
+        for (Transaction transaction : transactions) {
+            result.append("Transaction ID: ").append(transaction.getId()).append("\n")
+                    .append("Transaction Amount: ").append(transaction.getAmount()).append("\n")
+                    .append("Transaction Description: ").append(transaction.getDescription()).append("\n\n");
+
+        }
+        return result.toString();
+    }
+
+    public Double getBalance() throws SystemBusyException, NotFoundException, BadRequestException {
         return paymentService.getBalance(super.getUserName());
     }
 }

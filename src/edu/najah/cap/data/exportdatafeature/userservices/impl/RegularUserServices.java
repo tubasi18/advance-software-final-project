@@ -2,12 +2,11 @@ package edu.najah.cap.data.exportdatafeature.userservices.impl;
 
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
-import edu.najah.cap.data.exportdatafeature.userservices.intf.ICreateDataObjectUser;
+import edu.najah.cap.data.exportdatafeature.userservices.abst.ICreateDataObjectUser;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.iam.IUserService;
-import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.posts.IPostService;
 
 import java.util.List;

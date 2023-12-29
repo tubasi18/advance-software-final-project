@@ -1,7 +1,7 @@
 package edu.najah.cap.data.exportdatafeature.collector;
 
 import edu.najah.cap.data.exportdatafeature.userservices.factory.FactoryUserType;
-import edu.najah.cap.data.exportdatafeature.userservices.intf.ICreateDataObjectUser;
+import edu.najah.cap.data.exportdatafeature.userservices.abst.ICreateDataObjectUser;
 import edu.najah.cap.exceptions.*;
 import edu.najah.cap.iam.UserProfile;
 
