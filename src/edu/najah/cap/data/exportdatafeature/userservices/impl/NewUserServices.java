@@ -9,10 +9,10 @@ import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.posts.IPostService;
 
 public class NewUserServices extends ICreateDataObjectUser {
-    public NewUserServices(UserProfile userProfile,
+    public NewUserServices(String username,
                            IPostService postService,
                            IUserService userService) {
-        super(userService, userProfile, postService);
+        super(username, userService, postService);
     }
 
     @Override

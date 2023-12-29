@@ -14,14 +14,15 @@ public class FactoryUserType {
     }
 
     public static ICreateDataObjectUser creationUserDataObject(UserProfile user) throws InvalidUserTypeException {
+        String userName = user.getUserName();
         return switch (user.getUserType()) {
             case NEW_USER ->
-                    new NewUserServices(user, Services.getUserPostServiceInstance(), Services.getUserServiceInstance());
-            case REGULAR_USER -> new RegularUserServices(user,
+                    new NewUserServices(userName, Services.getUserPostServiceInstance(), Services.getUserServiceInstance());
+            case REGULAR_USER -> new RegularUserServices(userName,
                     Services.getUserPostServiceInstance(),
                     Services.getUserServiceInstance(),
                     Services.getUserActivityServiceInstance());
-            case PREMIUM_USER -> new PremiumUserServices(user,
+            case PREMIUM_USER -> new PremiumUserServices(userName,
                     Services.getUserActivityServiceInstance(),
                     Services.getUserPaymentServiceInstance(),
                     Services.getUserServiceInstance(),

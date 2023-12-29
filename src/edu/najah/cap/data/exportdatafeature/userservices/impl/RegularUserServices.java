@@ -15,11 +15,11 @@ import java.util.List;
 public class RegularUserServices extends ICreateDataObjectUser {
     IUserActivityService userActivityService;
 
-    public RegularUserServices(UserProfile userProfile,
+    public RegularUserServices(String userName,
                                IPostService postService,
                                IUserService userService,
                                IUserActivityService userActivityService) {
-        super(userService, userProfile, postService);
+        super(userName, userService, postService);
         this.userActivityService = userActivityService;
     }
 

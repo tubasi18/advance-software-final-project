@@ -17,12 +17,12 @@ public class PremiumUserServices extends ICreateDataObjectUser {
     IUserActivityService userActivityService;
     IPayment paymentService;
 
-    public PremiumUserServices(UserProfile userProfile,
+    public PremiumUserServices(String userName,
                                IUserActivityService userActivityService,
                                IPayment paymentService,
                                IUserService userService,
                                IPostService postService) {
-        super(userService, userProfile, postService);
+        super(userName,userService, postService);
         this.userActivityService = userActivityService;
         this.paymentService = paymentService;
 
@@ -52,7 +52,7 @@ public class PremiumUserServices extends ICreateDataObjectUser {
         return result.toString();
     }
 
-    public Double getPaymentData() {
+    public Double getPaymentData() throws SystemBusyException, NotFoundException, BadRequestException {
         return paymentService.getBalance(super.getUserName());
     }
 }

@@ -1,5 +1,6 @@
 package edu.najah.cap.data.exportdatafeature.userservices.intf;
 
+import edu.najah.cap.data.helpers.Services;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
@@ -10,27 +11,25 @@ import edu.najah.cap.posts.Post;
 
 import java.util.List;
 
-public abstract class ICreateDataObjectUser  {
+public abstract class ICreateDataObjectUser {
+    String userName;
     IUserService userService;
-    UserProfile userProfile;
     IPostService postService;
 
-
-
-    public UserProfile getUserProfile() {
-        return userProfile;
+    protected ICreateDataObjectUser(String userName, IUserService userService, IPostService postService) {
+        this.userName = userName;
+        this.userService = userService;
+        this.postService = postService;
     }
 
+    public UserProfile getUserProfile() throws SystemBusyException, NotFoundException, BadRequestException {
+        return Services.getUserServiceInstance().getUser(this.userName);
+    }
 
     public IPostService getPostService() {
         return postService;
     }
 
-    protected ICreateDataObjectUser(IUserService userService, UserProfile userProfile, IPostService postService) {
-        this.userService = userService;
-        this.userProfile = userProfile;
-        this.postService = postService;
-    }
 
     public String getPostsDetails() throws SystemBusyException, BadRequestException, NotFoundException {
         List<Post> posts = getPostService()
@@ -46,13 +45,13 @@ public abstract class ICreateDataObjectUser  {
         return result.toString();
     }
 
-    public String getDataProfile() {
+    public String getDataProfile() throws SystemBusyException, NotFoundException, BadRequestException {
         return "Name: " + getUserProfile().getUserName()
                 + " " + getUserProfile().getLastName()
                 + "\n" + "City: " + getUserProfile().getCity() + "\n";
     }
 
-    public String getUserName() {
+    public String getUserName() throws SystemBusyException, NotFoundException, BadRequestException {
         return getUserProfile().getUserName();
     }
 

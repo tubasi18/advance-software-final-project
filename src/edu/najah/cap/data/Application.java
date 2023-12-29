@@ -6,6 +6,7 @@ import edu.najah.cap.activity.UserActivityService;
 import edu.najah.cap.data.deletedatafeature.MangerDeletion;
 import edu.najah.cap.data.exportdatafeature.ExportData;
 import edu.najah.cap.data.enums.EnumAction;
+import edu.najah.cap.data.helpers.Services;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.exceptions.Util;
@@ -46,12 +47,13 @@ public class Application {
         //TODO Your application starts here. Do not Change the existing code
         try {
 
+            Services.setServices(userService, userActivityService, postService, paymentService);
             UserProfile user = userService.getUser(loginUserName);
             System.out.println(user.getUserType());
-           ExportData exportData = new ExportData();
-         exportData.exportData(user, EnumAction.DOWNLOAD_DIRECTLY);
-           MangerDeletion mangerDeletion = new MangerDeletion(user,false);
-           mangerDeletion.delete();
+            ExportData exportData = new ExportData();
+            exportData.exportData(user, EnumAction.DOWNLOAD_DIRECTLY);
+//            MangerDeletion mangerDeletion = new MangerDeletion(user, false);
+//            mangerDeletion.delete();
 
 
         } catch (SystemBusyException | BadRequestException e) {
@@ -61,21 +63,6 @@ public class Application {
         }
 
 
-
-        Map<Thread, StackTraceElement[]> allThreads = Thread.getAllStackTraces();
-        System.out.println(allThreads.size());
-        // Wait for all threads to finish
-        for (Thread thread : allThreads.keySet()) {
-            // Filter threads based on your criteria
-                if (thread.getName().startsWith("pool-")) {
-
-                try {
-                    thread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
         //TODO Your application ends here. Do not Change the existing code
         Instant end = Instant.now();
 
@@ -99,7 +86,7 @@ public class Application {
     private static void generateActivity(int i) {
         for (int j = 0; j < 100; j++) {
             try {
-                if(UserType.NEW_USER.equals(userService.getUser("user" + i).getUserType())) {
+                if (UserType.NEW_USER.equals(userService.getUser("user" + i).getUserType())) {
                     continue;
                 }
             } catch (Exception e) {
