@@ -22,10 +22,10 @@ public class PostDeletion implements PostDeletionBehavior {
         ExecutorService executor = Executors.newFixedThreadPool(5);
 
         try {
-            for (Post activity : userPosts) {
+            for (Post post : userPosts) {
                 executor.submit(() -> {
                     try {
-                        Services.getUserPostServiceInstance().deletePost(user.getUserName(),activity.getId());
+                        Services.getUserPostServiceInstance().deletePost(user.getUserName(),post.getId());
                     } catch (NotFoundException | SystemBusyException | BadRequestException e) {
                         e.printStackTrace();
                     }

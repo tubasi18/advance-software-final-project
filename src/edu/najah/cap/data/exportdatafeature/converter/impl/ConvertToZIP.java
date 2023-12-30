@@ -15,6 +15,7 @@ import java.util.zip.ZipOutputStream;
 public class ConvertToZIP implements IConverter {
     @Override
     public byte[] convert(List<String> pdfDataList) {
+        String[] nameOfFiles = {"User_Details","Payment_Details"};
         try (ByteArrayOutputStream zipByteArrayOutputStream = new ByteArrayOutputStream();
              ZipOutputStream zipOutputStream = new ZipOutputStream(zipByteArrayOutputStream)) {
             for (int i = 0; i < pdfDataList.size(); i++) {
@@ -28,7 +29,7 @@ public class ConvertToZIP implements IConverter {
                     document.add(new Paragraph(line));
                 }
                 document.close();
-                ZipEntry zipEntry = new ZipEntry("UserDetails_" + (i + 1) + ".pdf");
+                ZipEntry zipEntry = new ZipEntry(nameOfFiles[i]  + ".pdf");
                 zipOutputStream.putNextEntry(zipEntry);
                 zipOutputStream.write(pdfOutputStream.toByteArray());
                 zipOutputStream.closeEntry();

@@ -18,7 +18,6 @@ public class ActivityDeletion implements ActivityDeletionBehavior {
         List<UserActivity> userActivities = Services.getUserActivityServiceInstance().getUserActivity(user.getUserName());
 
         ExecutorService executor = Executors.newFixedThreadPool(5);
-
         try {
             for (UserActivity activity : userActivities) {
                 executor.submit(() -> {

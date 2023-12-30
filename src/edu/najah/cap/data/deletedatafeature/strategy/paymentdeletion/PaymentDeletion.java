@@ -21,10 +21,10 @@ public class PaymentDeletion implements PaymentDeletionBehavior {
         ExecutorService executor = Executors.newFixedThreadPool(5);
 
         try {
-            for (Transaction activity : userTransactionList) {
+            for (Transaction transaction : userTransactionList) {
                 executor.submit(() -> {
                     try {
-                        Services.getUserPaymentServiceInstance().removeTransaction(user.getUserName(), activity.getId());
+                        Services.getUserPaymentServiceInstance().removeTransaction(user.getUserName(), transaction.getId());
                     } catch (SystemBusyException | BadRequestException | NotFoundException e) {
                         e.printStackTrace();
                     }

@@ -16,7 +16,7 @@ import java.util.List;
 public class ExportData {
     IDataCollector dataCollector;
 
-    public void exportData(UserProfile user, EnumAction action) throws FileFiledException, SystemBusyException, BadRequestException, NotFoundException, NullValueException, InvalidUserTypeException {
+    public void exportData(UserProfile user, EnumAction action) throws Exception {
         List<String> data = getData(user);
         byte[] zipData;
 
