@@ -28,8 +28,6 @@ public class ExportData {
             IConverter converter = FactoryConverter.createConverter(ConverterType.TOZIP);
             zipData = converter.convert(List.of(data.get(0)));
         }
-
-        System.out.println("PDF file and Zip file created successfully.");
         StrategyAction.typeAction(action, zipData);
     }
 

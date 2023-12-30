@@ -51,7 +51,7 @@ public class Application {
             UserProfile user = userService.getUser(loginUserName);
             System.out.println(user.getUserType());
             ExportData exportData = new ExportData();
-            exportData.exportData(user, EnumAction.DOWNLOAD_DIRECTLY);
+            exportData.exportData(user, EnumAction.UPLOAD_TO_STORAGE);
 //            MangerDeletion mangerDeletion = new MangerDeletion(user, false);
 //            mangerDeletion.delete();
 
