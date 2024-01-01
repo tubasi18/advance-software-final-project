@@ -8,12 +8,14 @@ import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.posts.IPostService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class RegularUserServices extends ICreateDataObjectUser {
-    IUserActivityService userActivityService;
-
+   private IUserActivityService userActivityService;
+    private static final Logger logger = LogManager.getLogger(NewUserServices.class);
     public RegularUserServices(String userName,
                                IPostService postService,
                                IUserService userService,
@@ -24,6 +26,7 @@ public class RegularUserServices extends ICreateDataObjectUser {
 
     @Override
     public String getDataUser() throws SystemBusyException, BadRequestException, NotFoundException {
+        logger.info(String.format("Data generated Successfully for the regular user: %s", getUserName()));
         return super.getDataProfile()
                 + super.getPostsDetails()
                 + getActivityData();
@@ -39,6 +42,7 @@ public class RegularUserServices extends ICreateDataObjectUser {
                     .append("Activity Date: ").append(userActivity.getActivityDate()).append("\n")
                     .append("Activity Type: ").append(userActivity.getActivityType()).append("\n\n");
         }
+        logger.info(String.format("Activity data generated Successfully for the regular user: %s", getUserName()));
         return result.toString();
     }
 }

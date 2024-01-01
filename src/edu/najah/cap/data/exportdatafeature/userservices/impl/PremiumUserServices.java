@@ -10,12 +10,16 @@ import edu.najah.cap.iam.IUserService;
 import edu.najah.cap.payment.IPayment;
 import edu.najah.cap.payment.Transaction;
 import edu.najah.cap.posts.IPostService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class PremiumUserServices extends ICreateDataObjectUser {
-    IUserActivityService userActivityService;
-    IPayment paymentService;
+    private IUserActivityService userActivityService;
+    private IPayment paymentService;
+    private static final Logger logger = LogManager.getLogger(PremiumUserServices.class);
+
 
     public PremiumUserServices(String userName,
                                IUserActivityService userActivityService,
@@ -30,7 +34,7 @@ public class PremiumUserServices extends ICreateDataObjectUser {
 
     @Override
     public String getDataUser() throws SystemBusyException, BadRequestException, NotFoundException {
-
+        logger.info(String.format("Data generated Successfully for the premium user: %s", getUserName()));
         return super.getDataProfile()
                 + super.getPostsDetails()
                 + "Activity Data: " + getActivityData() +
@@ -49,10 +53,12 @@ public class PremiumUserServices extends ICreateDataObjectUser {
                     .append("Activity Date: ").append(userActivity.getActivityDate()).append("\n")
                     .append("Activity Type: ").append(userActivity.getActivityType()).append("\n\n");
         }
+        logger.info(String.format("Activity data generated Successfully for the premium user: %s", getUserName()));
         return result.toString();
     }
 
     public String getPaymentData() throws SystemBusyException, NotFoundException, BadRequestException {
+        logger.info(String.format("Payment data generated Successfully for the premium user: %s", getUserName()));
         return "\n" + "Balance: " + getBalance().toString() + "\n" + "Transactions: " + "\n" + getTransactionData();
     }
 
@@ -65,10 +71,12 @@ public class PremiumUserServices extends ICreateDataObjectUser {
                     .append("Transaction Description: ").append(transaction.getDescription()).append("\n\n");
 
         }
+        logger.info(String.format("Transaction data generated Successfully for the premium user: %s", getUserName()));
         return result.toString();
     }
 
     public Double getBalance() throws SystemBusyException, NotFoundException, BadRequestException {
+        logger.info(String.format("Balance data generated Successfully for the premium user: %s", getUserName()));
         return paymentService.getBalance(super.getUserName());
     }
 }

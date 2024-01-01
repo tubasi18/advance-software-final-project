@@ -4,7 +4,10 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import edu.najah.cap.data.exportdatafeature.converter.factory.FactoryConverter;
 import edu.najah.cap.data.exportdatafeature.converter.intf.IConverter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,6 +16,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class ConvertToZIP implements IConverter {
+    private static final Logger logger = LogManager.getLogger(ConvertToZIP.class);
     @Override
     public byte[] convert(List<String> pdfDataList) {
         String[] nameOfFiles = {"User_Details","Payment_Details"};
@@ -37,7 +41,6 @@ public class ConvertToZIP implements IConverter {
             zipOutputStream.finish();
             return zipByteArrayOutputStream.toByteArray();
         } catch (DocumentException | IOException e) {
-            e.printStackTrace();
             return new byte[]{};
         }
     }
