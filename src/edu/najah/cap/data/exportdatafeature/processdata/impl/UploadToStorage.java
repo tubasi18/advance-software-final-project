@@ -1,7 +1,6 @@
 package edu.najah.cap.data.exportdatafeature.processdata.impl;
 
 import edu.najah.cap.data.enums.UploadType;
-import edu.najah.cap.data.exportdatafeature.ExportData;
 import edu.najah.cap.data.exportdatafeature.processdata.factory.FactoryUpload;
 import com.dropbox.core.DbxException;
 import edu.najah.cap.data.exportdatafeature.processdata.intf.IUploadService;

@@ -3,9 +3,10 @@
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$" dumb="true">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main" isTestSource="false" />
     </content>
   </component>
   <component name="SonarLintModuleSettings">
-    <option name="uniqueId" value="6b50e4c1-1358-4dda-8c7c-21f4d84477dc" />
+    <option name="uniqueId" value="135991d0-8156-4d4c-879e-076fc5213c5d" />
   </component>
 </module>
