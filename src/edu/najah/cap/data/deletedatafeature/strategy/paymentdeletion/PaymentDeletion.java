@@ -1,6 +1,5 @@
 package edu.najah.cap.data.deletedatafeature.strategy.paymentdeletion;
 
-import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.data.helpers.Services;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
