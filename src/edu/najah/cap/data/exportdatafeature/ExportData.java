@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ExportData {
     private static final Logger logger = LogManager.getLogger(ExportData.class);
-    public void exportData(UserProfile user, EnumAction action) throws SystemBusyException, InvalidUserTypeException, BadRequestException, NotFoundException, NullValueException, InvalidUploadTypeException, FileFiledException, IOException, DbxException, InvalidActionTypeException {
+    public void exportData(UserProfile user, EnumAction action) throws SystemBusyException, InvalidUserTypeException, BadRequestException, NotFoundException, NullValueException, InvalidUploadTypeException, FileFiledException, IOException, DbxException, InvalidActionTypeException, InvalidConvertTypeException {
         List<String> data = getData(user);
         byte[] zipData;
 

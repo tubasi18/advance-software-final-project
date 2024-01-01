@@ -39,8 +39,10 @@ public class ConvertToZIP implements IConverter {
                 zipOutputStream.closeEntry();
             }
             zipOutputStream.finish();
+            logger.info("Make the ZIP file for data user . ");
             return zipByteArrayOutputStream.toByteArray();
         } catch (DocumentException | IOException e) {
+            logger.error("Error in the convert data file to ZIP file in calls ConvertToZIP .");
             return new byte[]{};
         }
     }
