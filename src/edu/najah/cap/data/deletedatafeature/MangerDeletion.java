@@ -1,20 +1,15 @@
 package edu.najah.cap.data.deletedatafeature;
 
-import edu.najah.cap.data.deletedatafeature.strategy.FactoryContext;
-import edu.najah.cap.exceptions.BadRequestException;
-import edu.najah.cap.exceptions.NotFoundException;
-import edu.najah.cap.exceptions.SystemBusyException;
+import edu.najah.cap.data.deletedatafeature.factory.FactoryDeletionType;
+import edu.najah.cap.data.deletedatafeature.factory.intf.IDeleteType;
+import edu.najah.cap.data.enums.DeleteType;
+import edu.najah.cap.exceptions.*;
 import edu.najah.cap.iam.UserProfile;
 
 public class MangerDeletion {
-    public  UserProfile user;
-    public  boolean bool;
-    public MangerDeletion(UserProfile user , boolean bool)  {
-        this.user= user;
-        this.bool=bool;
-    }
 
-    public  void delete() throws SystemBusyException, BadRequestException, NotFoundException {
-        FactoryContext.factoryProcess(user,bool);
+    public  void delete(UserProfile user , DeleteType type) throws SystemBusyException, BadRequestException, NotFoundException, InterruptedException, InvaildDeleteTypeException, InvalidUserTypeException {
+        IDeleteType deleteType = FactoryDeletionType.factoryProcess(type);
+        deleteType.delete(user);
     }
 }
