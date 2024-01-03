@@ -16,8 +16,8 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 public class PremiumUserServices extends ICreateDataObjectUser {
-    private IUserActivityService userActivityService;
-    private IPayment paymentService;
+    private final IUserActivityService userActivityService;
+    private final IPayment paymentService;
     private static final Logger logger = LogManager.getLogger(PremiumUserServices.class);
 
 

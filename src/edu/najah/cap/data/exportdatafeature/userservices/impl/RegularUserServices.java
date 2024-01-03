@@ -14,8 +14,8 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 public class RegularUserServices extends ICreateDataObjectUser {
-   private IUserActivityService userActivityService;
-    private static final Logger logger = LogManager.getLogger(NewUserServices.class);
+   private final IUserActivityService userActivityService;
+    private static final Logger logger = LogManager.getLogger(RegularUserServices.class);
     public RegularUserServices(String userName,
                                IPostService postService,
                                IUserService userService,

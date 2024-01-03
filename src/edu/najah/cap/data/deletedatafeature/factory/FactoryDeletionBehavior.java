@@ -1,10 +1,9 @@
 package edu.najah.cap.data.deletedatafeature.factory;
 
-import edu.najah.cap.data.deletedatafeature.factory.intf.IDeletionBehavior;
-import edu.najah.cap.data.deletedatafeature.factory.deletionbehavior.ActivityDeletion;
-import edu.najah.cap.data.deletedatafeature.factory.deletionbehavior.PaymentDeletion;
-import edu.najah.cap.data.deletedatafeature.factory.deletionbehavior.PostDeletion;
-import edu.najah.cap.data.deletedatafeature.factory.typedelete.HardDelete;
+import edu.najah.cap.data.deletedatafeature.intf.IDeletionBehavior;
+import edu.najah.cap.data.deletedatafeature.deletionbehavior.ActivityDeletion;
+import edu.najah.cap.data.deletedatafeature.deletionbehavior.PaymentDeletion;
+import edu.najah.cap.data.deletedatafeature.deletionbehavior.PostDeletion;
 import edu.najah.cap.exceptions.InvalidUserTypeException;
 import edu.najah.cap.iam.UserProfile;
 import org.apache.logging.log4j.LogManager;
@@ -34,7 +33,7 @@ public class FactoryDeletionBehavior {
                 logger.info("User Type is Premium; Post, Activity and Payment deletions are Returned");
                 return deletionBehaviors;
         }
-        logger.error("Unsupported user type" + user.getUserType());
+        logger.error(String.format("Unsupported user type %s" , user.getUserType()));
         throw new InvalidUserTypeException("Unsupported user type." + user.getUserType());
     }
 }

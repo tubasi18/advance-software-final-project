@@ -3,11 +3,13 @@ package edu.najah.cap.data;
 import edu.najah.cap.activity.IUserActivityService;
 import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.activity.UserActivityService;
-import edu.najah.cap.data.deletedatafeature.MangerDeletion;
-import edu.najah.cap.data.exportdatafeature.ExportData;
+import edu.najah.cap.data.deletedatafeature.managerdeletion.ManagerDeletion;
+import edu.najah.cap.data.enums.DeleteType;
+import edu.najah.cap.data.exportdatafeature.exportdata.ExportData;
 import edu.najah.cap.data.enums.EnumAction;
 import edu.najah.cap.data.helpers.Services;
 import edu.najah.cap.exceptions.BadRequestException;
+import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.exceptions.Util;
 import edu.najah.cap.iam.IUserService;
@@ -22,7 +24,6 @@ import edu.najah.cap.posts.Post;
 import edu.najah.cap.posts.PostService;
 
 import java.time.Instant;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Application {
@@ -34,35 +35,53 @@ public class Application {
 
     private static String loginUserName;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SystemBusyException, BadRequestException, NotFoundException {
         generateRandomData();
         Instant start = Instant.now();
         System.out.println("Application Started: " + start);
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your username: ");
         System.out.println("Note: You can use any of the following usernames: user0, user1, user2, user3, .... user99");
-//          String userName = scanner.next();
-        String userName = "user9";
+        String userName = scanner.next();
         setLoginUserName(userName);
         //TODO Your application starts here. Do not Change the existing code
+        Services.setServices(userService, userActivityService, postService, paymentService);
         try {
-
-            Services.setServices(userService, userActivityService, postService, paymentService);
             UserProfile user = userService.getUser(loginUserName);
-            System.out.println(user.getUserType());
-            ExportData exportData = new ExportData();
-            exportData.exportData(user, EnumAction.UPLOAD_TO_STORAGE);
-//            MangerDeletion mangerDeletion = new MangerDeletion(user, false);
-//            mangerDeletion.delete();
-
-
-        } catch (SystemBusyException | BadRequestException e) {
-            System.out.println(e.getMessage());
+            boolean continueActions = true;
+            while (continueActions) {
+                System.out.println("Choose an action: 1 - Export Data, 2 - Delete Data, 3 - Exit");
+                int userChoice = scanner.nextInt();
+                switch (userChoice) {
+                    case 1:
+                        System.out.println("Choose an action: - Download Data , - Upload Data ");
+                        ExportData exportData = new ExportData();
+                        String choiceUserExport = scanner.next();
+                        EnumAction typeExport = EnumAction.valueOf(choiceUserExport.toUpperCase());
+                        exportData.exportData(user, typeExport);
+                        break;
+                    case 2:
+                        System.out.println("Choose an action:  Soft Delete Data ,  Hard Delete Data ");
+                        ManagerDeletion mangerDeletion = new ManagerDeletion();
+                        String choiceUserDelete = scanner.next();
+                        DeleteType typeDelete = DeleteType.valueOf(choiceUserDelete.toUpperCase());
+                        mangerDeletion.delete(user, typeDelete);
+                        break;
+                    case 3:
+                        continueActions = false;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter 1, 2, or 3.");
+                }
+                if (continueActions) {
+                    System.out.println("Do you want to perform another action? (yes/no)");
+                    String userResponse = scanner.next().toLowerCase();
+                    continueActions = userResponse.equals("yes");
+                }
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-
         //TODO Your application ends here. Do not Change the existing code
         Instant end = Instant.now();
 

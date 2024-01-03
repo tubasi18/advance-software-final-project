@@ -6,9 +6,9 @@ public class ValidationActionType {
     private ValidationActionType() {}
 
     public static boolean isDownload(EnumAction action) {
-        return action.equals(EnumAction.DOWNLOAD_DIRECTLY);
+        return action.equals(EnumAction.DOWNLOAD);
     }
     public static boolean isUpload(EnumAction action) {
-        return action.equals(EnumAction.UPLOAD_TO_STORAGE);
+        return action.equals(EnumAction.UPLOAD);
     }
 }

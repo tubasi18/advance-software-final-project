@@ -4,7 +4,6 @@ import com.dropbox.core.DbxException;
 import edu.najah.cap.exceptions.FileFiledException;
 import edu.najah.cap.exceptions.InvalidUploadTypeException;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public interface IActionable {

@@ -4,7 +4,6 @@ import edu.najah.cap.data.enums.ConverterType;
 import edu.najah.cap.data.exportdatafeature.converter.impl.ConvertToZIP;
 import edu.najah.cap.data.exportdatafeature.converter.intf.IConverter;
 import edu.najah.cap.exceptions.InvalidConvertTypeException;
-import edu.najah.cap.exceptions.InvalidUploadTypeException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

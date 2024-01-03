@@ -1,4 +1,4 @@
-package edu.najah.cap.data.deletedatafeature.factory.intf;
+package edu.najah.cap.data.deletedatafeature.intf;
 
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;

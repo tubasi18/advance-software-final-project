@@ -1,8 +1,8 @@
-package edu.najah.cap.data.deletedatafeature.factory.typedelete;
+package edu.najah.cap.data.deletedatafeature.typedelete;
 
 import edu.najah.cap.data.deletedatafeature.factory.FactoryDeletionBehavior;
-import edu.najah.cap.data.deletedatafeature.factory.intf.IDeleteType;
-import edu.najah.cap.data.deletedatafeature.factory.intf.IDeletionBehavior;
+import edu.najah.cap.data.deletedatafeature.intf.IDeleteType;
+import edu.najah.cap.data.deletedatafeature.intf.IDeletionBehavior;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.InvalidUserTypeException;
 import edu.najah.cap.exceptions.NotFoundException;

@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class UploadToStorage implements IActionable {
     private static final Logger logger = LogManager.getLogger(UploadToStorage.class);
     @Override
-    public void actionProcess(byte[] data, String fileName) throws IOException, DbxException, InvalidUploadTypeException {
+    public void actionProcess(byte[] data, String fileName) throws InvalidUploadTypeException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter the upload type (e.g., DROPBOX): ");
         String inputType = scanner.nextLine();

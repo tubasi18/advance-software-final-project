@@ -1,6 +1,6 @@
-package edu.najah.cap.data.deletedatafeature.factory.deletionbehavior;
+package edu.najah.cap.data.deletedatafeature.deletionbehavior;
 
-import edu.najah.cap.data.deletedatafeature.factory.intf.IDeletionBehavior;
+import edu.najah.cap.data.deletedatafeature.intf.IDeletionBehavior;
 import edu.najah.cap.data.helpers.Services;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
@@ -28,15 +28,9 @@ public class PostDeletion implements IDeletionBehavior {
                 } catch (NotFoundException | SystemBusyException | BadRequestException e) {
                     //logger.error("Error deleting post " , e);
                     e.printStackTrace();
-
                 }
             });
         }
         executor.shutdown();
-        try {
-            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
+  }
 }

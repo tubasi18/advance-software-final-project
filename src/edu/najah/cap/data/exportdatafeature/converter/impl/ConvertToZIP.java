@@ -4,7 +4,6 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import edu.najah.cap.data.exportdatafeature.converter.factory.FactoryConverter;
 import edu.najah.cap.data.exportdatafeature.converter.intf.IConverter;
 import edu.najah.cap.exceptions.NullValueException;
 import org.apache.logging.log4j.LogManager;
