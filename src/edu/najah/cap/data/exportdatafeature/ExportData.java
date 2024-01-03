@@ -13,23 +13,22 @@ import edu.najah.cap.exceptions.*;
 import edu.najah.cap.iam.UserProfile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.util.List;
 
 public class ExportData {
     private static final Logger logger = LogManager.getLogger(ExportData.class);
+
     public void exportData(UserProfile user, EnumAction action) throws SystemBusyException, InvalidUserTypeException, BadRequestException, NotFoundException, NullValueException, InvalidUploadTypeException, FileFiledException, IOException, DbxException, InvalidActionTypeException, InvalidConvertTypeException {
         List<String> data = getData(user);
         byte[] zipData;
 
         IConverter converter = FactoryConverter.createConverter(ConverterType.TOZIP);
-        if (ValidationUserType.isPremium(user)) {
-            zipData = converter.convert(data);
-            System.out.println("PDF files and Zip file created successfully.");
-        } else {
-            zipData = converter.convert(List.of(data.get(0)));
-            System.out.println("PDF file and Zip file created successfully.");
-        }
+
+        zipData = converter.convert(data);
+        System.out.println("PDF files and Zip file created successfully.");
+
         logger.info(String.format("PDF files and Zip file created successfully  for user %s", user.getUserName()));
         StrategyAction.typeAction(action, zipData);
     }

@@ -1,7 +1,7 @@
 package edu.najah.cap.data.deletedatafeature.factory.typedelete;
 
 import edu.najah.cap.data.deletedatafeature.factory.FactoryDeletionBehavior;
-import edu.najah.cap.data.deletedatafeature.factory.impl.ProfileDeletion;
+import edu.najah.cap.data.deletedatafeature.factory.deletionbehavior.ProfileDeletion;
 import edu.najah.cap.data.deletedatafeature.factory.intf.IDeleteType;
 import edu.najah.cap.data.deletedatafeature.factory.intf.IDeletionBehavior;
 import edu.najah.cap.exceptions.BadRequestException;

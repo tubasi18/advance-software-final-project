@@ -32,7 +32,7 @@ public class StrategyAction {
         }
         else {
             logger.error(String.format("Invalid Action type %s.", action));
-            throw new InvalidActionTypeException("Invalid Action type ");
+            throw new InvalidActionTypeException(String.format("Invalid Action type %s.", action));
         }
     }
 }

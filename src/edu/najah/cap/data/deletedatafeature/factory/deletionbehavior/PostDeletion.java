@@ -1,30 +1,26 @@
-package edu.najah.cap.data.deletedatafeature.factory.impl;
+package edu.najah.cap.data.deletedatafeature.factory.deletionbehavior;
 
-import edu.najah.cap.activity.UserActivity;
 import edu.najah.cap.data.deletedatafeature.factory.intf.IDeletionBehavior;
 import edu.najah.cap.data.helpers.Services;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.iam.UserProfile;
-import edu.najah.cap.payment.Transaction;
+import edu.najah.cap.posts.Post;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
-public class ActivityDeletion implements IDeletionBehavior {
-    @Override
+public class PostDeletion implements IDeletionBehavior {
+
     public void delete(UserProfile user) throws SystemBusyException, BadRequestException, NotFoundException {
-        List<UserActivity> userActivities = Services.getUserActivityServiceInstance().getUserActivity(user.getUserName());
-
+        List<Post> userPosts = Services.getUserPostServiceInstance().getPosts(user.getUserName());
 
         ExecutorService executor = Executors.newFixedThreadPool(10);
-        for (UserActivity activity : userActivities) {
+        for (Post activity : userPosts) {
             executor.submit(() -> {
                 try {
-                      Services.getUserPostServiceInstance().deletePost(user.getUserName(), activity.getId());
+                    Services.getUserPostServiceInstance().deletePost(user.getUserName(), activity.getId());
                 } catch (NotFoundException | SystemBusyException | BadRequestException e) {
                     e.printStackTrace();
                 }
@@ -38,4 +34,3 @@ public class ActivityDeletion implements IDeletionBehavior {
         }
     }
 }
-

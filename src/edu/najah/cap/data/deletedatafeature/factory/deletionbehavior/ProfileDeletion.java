@@ -1,4 +1,4 @@
-package edu.najah.cap.data.deletedatafeature.factory.impl;
+package edu.najah.cap.data.deletedatafeature.factory.deletionbehavior;
 import edu.najah.cap.data.deletedatafeature.factory.intf.IDeletionBehavior;
 import edu.najah.cap.data.helpers.UsersDeletedTracker;
 import edu.najah.cap.data.helpers.Services;

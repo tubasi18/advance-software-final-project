@@ -24,7 +24,7 @@ public class UploadToStorage implements IActionable {
             uploadStorage = FactoryUpload.createUploader(type);
             uploadStorage.upload(data, fileName);
             logger.info(String.format("The user enter the type of upload : %s, name of file: %s", inputType, fileName));
-        } catch (Exception e) {
+        }  catch (IOException | DbxException e) {
             logger.error(e.getMessage());
             throw new InvalidUploadTypeException(e.getMessage());
 

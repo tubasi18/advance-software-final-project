@@ -1,9 +1,9 @@
 package edu.najah.cap.data.deletedatafeature.factory;
 
 import edu.najah.cap.data.deletedatafeature.factory.intf.IDeletionBehavior;
-import edu.najah.cap.data.deletedatafeature.factory.impl.ActivityDeletion;
-import edu.najah.cap.data.deletedatafeature.factory.impl.PaymentDeletion;
-import edu.najah.cap.data.deletedatafeature.factory.impl.PostDeletion;
+import edu.najah.cap.data.deletedatafeature.factory.deletionbehavior.ActivityDeletion;
+import edu.najah.cap.data.deletedatafeature.factory.deletionbehavior.PaymentDeletion;
+import edu.najah.cap.data.deletedatafeature.factory.deletionbehavior.PostDeletion;
 import edu.najah.cap.exceptions.InvalidUserTypeException;
 import edu.najah.cap.iam.UserProfile;
 import java.util.ArrayList;

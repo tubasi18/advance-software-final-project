@@ -8,7 +8,7 @@ import edu.najah.cap.iam.UserProfile;
 
 public class MangerDeletion {
 
-    public  void delete(UserProfile user , DeleteType type) throws SystemBusyException, BadRequestException, NotFoundException, InterruptedException, InvaildDeleteTypeException, InvalidUserTypeException {
+    public  void delete(UserProfile user , DeleteType type) throws SystemBusyException, BadRequestException, NotFoundException, InterruptedException, InvalidDeleteTypeException, InvalidUserTypeException {
         IDeleteType deleteType = FactoryDeletionType.factoryProcess(type);
         deleteType.delete(user);
     }

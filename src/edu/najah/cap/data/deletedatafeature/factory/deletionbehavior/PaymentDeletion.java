@@ -1,4 +1,4 @@
-package edu.najah.cap.data.deletedatafeature.factory.impl;
+package edu.najah.cap.data.deletedatafeature.factory.deletionbehavior;
 
 import edu.najah.cap.data.deletedatafeature.factory.intf.IDeletionBehavior;
 import edu.najah.cap.data.helpers.Services;
@@ -7,7 +7,6 @@ import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.iam.UserProfile;
 import edu.najah.cap.payment.Transaction;
-import edu.najah.cap.posts.Post;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
