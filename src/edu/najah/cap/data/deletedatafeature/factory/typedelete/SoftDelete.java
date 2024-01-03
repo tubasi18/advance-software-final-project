@@ -8,13 +8,18 @@ import edu.najah.cap.exceptions.InvalidUserTypeException;
 import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.iam.UserProfile;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class SoftDelete implements IDeleteType {
+    private static final Logger logger = LogManager.getLogger(SoftDelete.class);
+
     @Override
     public void delete(UserProfile user) throws InvalidUserTypeException, SystemBusyException, BadRequestException, NotFoundException, InterruptedException {
         List<IDeletionBehavior> list =  FactoryDeletionBehavior.deletionBehavior(user);
+        logger.info("Returned Behavior List with behaviors Associated with This Account for Deletion");
         for (IDeletionBehavior iDeletionBehavior : list) {
             iDeletionBehavior.delete(user);
         }
