@@ -7,6 +7,7 @@ import edu.najah.cap.data.deletedatafeature.managerdeletion.ManagerDeletion;
 import edu.najah.cap.data.enums.DeleteType;
 import edu.najah.cap.data.exportdatafeature.exportdata.ExportData;
 import edu.najah.cap.data.enums.EnumAction;
+import edu.najah.cap.data.helpers.MenuActions;
 import edu.najah.cap.data.helpers.Services;
 import edu.najah.cap.exceptions.BadRequestException;
 import edu.najah.cap.exceptions.NotFoundException;
@@ -24,6 +25,7 @@ import edu.najah.cap.posts.Post;
 import edu.najah.cap.posts.PostService;
 
 import java.time.Instant;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Application {
@@ -54,18 +56,10 @@ public class Application {
                 int userChoice = scanner.nextInt();
                 switch (userChoice) {
                     case 1:
-                        System.out.println("Choose an action: - Download Data , - Upload Data ");
-                        ExportData exportData = new ExportData();
-                        String choiceUserExport = scanner.next();
-                        EnumAction typeExport = EnumAction.valueOf(choiceUserExport.toUpperCase());
-                        exportData.exportData(user, typeExport);
+                        MenuActions.exportAction(user);
                         break;
                     case 2:
-                        System.out.println("Choose an action:  Soft Delete Data ,  Hard Delete Data ");
-                        ManagerDeletion mangerDeletion = new ManagerDeletion();
-                        String choiceUserDelete = scanner.next();
-                        DeleteType typeDelete = DeleteType.valueOf(choiceUserDelete.toUpperCase());
-                        mangerDeletion.delete(user, typeDelete);
+                        MenuActions.deleteAction(user);
                         break;
                     case 3:
                         continueActions = false;
@@ -87,6 +81,7 @@ public class Application {
 
         System.out.println("Application Ended: " + end);
     }
+
 
 
     private static void generateRandomData() {

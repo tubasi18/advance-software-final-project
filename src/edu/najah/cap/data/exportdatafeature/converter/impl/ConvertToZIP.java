@@ -5,7 +5,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import edu.najah.cap.data.exportdatafeature.converter.intf.IConverter;
-import edu.najah.cap.exceptions.NullValueException;
+import edu.najah.cap.exceptions.InvalidUserDataException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,7 +18,7 @@ import java.util.zip.ZipOutputStream;
 public class ConvertToZIP implements IConverter {
     private static final Logger logger = LogManager.getLogger(ConvertToZIP.class);
     @Override
-    public byte[] convert(List<String> pdfDataList) throws NullValueException {
+    public byte[] convert(List<String> pdfDataList) throws InvalidUserDataException {
         String[] nameOfFiles = {"User_Details","Payment_Details"};
         try (ByteArrayOutputStream zipByteArrayOutputStream = new ByteArrayOutputStream();
              ZipOutputStream zipOutputStream = new ZipOutputStream(zipByteArrayOutputStream)) {
@@ -43,7 +43,7 @@ public class ConvertToZIP implements IConverter {
             return zipByteArrayOutputStream.toByteArray();
         } catch (DocumentException | IOException e) {
             logger.error("Error in the convert data file to ZIP file in calls ConvertToZIP .");
-            throw new NullValueException("No data for user to ZIP it .");
+            throw new InvalidUserDataException("No data for user to ZIP it .");
         }
     }
 }

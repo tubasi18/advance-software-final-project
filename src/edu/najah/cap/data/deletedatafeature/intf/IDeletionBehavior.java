@@ -5,6 +5,8 @@ import edu.najah.cap.exceptions.NotFoundException;
 import edu.najah.cap.exceptions.SystemBusyException;
 import edu.najah.cap.iam.UserProfile;
 
+import java.io.FileNotFoundException;
+
 public interface IDeletionBehavior {
-    void delete(UserProfile user) throws SystemBusyException, BadRequestException, NotFoundException, InterruptedException;
+    void delete(UserProfile user) throws SystemBusyException, BadRequestException, NotFoundException, InterruptedException, FileNotFoundException;
 }

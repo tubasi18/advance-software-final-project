@@ -12,12 +12,12 @@ import org.apache.logging.log4j.Logger;
 public class DataCollector implements IDataCollector {
     private static final Logger logger = LogManager.getLogger(DataCollector.class);
 
-    public String collectData(UserProfile user) throws SystemBusyException, BadRequestException, NotFoundException, NullValueException, InvalidUserTypeException {
+    public String collectData(UserProfile user) throws SystemBusyException, BadRequestException, NotFoundException, InvalidUserDataException, InvalidUserTypeException {
 
         ICreateDataObjectUser userData = FactoryUserType.creationUserDataObject(user);
         if (ValidationDataCollector.isUserDataNull(userData)) {
-            logger.error(String.format("User data is null for : %s", user.getUserName()));
-            throw new NullValueException(" Null value for User");
+            logger.error(String.format("Invalid data for user : %s", user.getUserName()));
+            throw new InvalidUserDataException("Invalid user data");
         }
         return userData.getDataUser();
     }

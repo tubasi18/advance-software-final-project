@@ -8,5 +8,5 @@ import edu.najah.cap.iam.UserProfile;
 import java.io.IOException;
 
 public interface IExport {
-    void exportData(UserProfile user, EnumAction action)throws SystemBusyException, InvalidUserTypeException, BadRequestException, NotFoundException, NullValueException, InvalidUploadTypeException, FileFiledException, IOException, DbxException, InvalidActionTypeException, InvalidConvertTypeException;
+    void exportData(UserProfile user, EnumAction action)throws SystemBusyException, InvalidUserTypeException, BadRequestException, NotFoundException, InvalidUserDataException, InvalidUploadTypeException, FileFiledException, IOException, DbxException, InvalidActionTypeException, InvalidConvertTypeException;
 }

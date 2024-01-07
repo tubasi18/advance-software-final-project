@@ -9,6 +9,7 @@ import edu.najah.cap.iam.UserProfile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class HardDelete implements IDeleteType {
     private static final Logger logger = LogManager.getLogger(HardDelete.class);
 
     @Override
-    public void delete(UserProfile user) throws InvalidUserTypeException, SystemBusyException, BadRequestException, NotFoundException, InterruptedException, InvalidUserNameException {
+    public void delete(UserProfile user) throws InvalidUserTypeException, SystemBusyException, BadRequestException, NotFoundException, InterruptedException, InvalidUserNameException, FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your username to delete all your data ? ");
         String userName = scanner.next();
@@ -28,6 +29,8 @@ public class HardDelete implements IDeleteType {
             for (IDeletionBehavior iDeletionBehavior : list) {
                 iDeletionBehavior.delete(user);
             }
+            System.out.println("hard Deleted is  successfully , have a good day ");
+            logger.info(String.format("Deleted successfully for user : %s" , user.getUserName()));
         } else {
             logger.error("not the same owner as account {}", userName);
             throw new InvalidUserNameException("You are not the same owner as account " + userName);

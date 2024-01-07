@@ -14,7 +14,7 @@ public class ExportUtils {
     private ExportUtils(){}
     private static final Logger logger = LogManager.getLogger(ExportUtils.class);
 
-    public static List<String> getData(UserProfile user) throws SystemBusyException, InvalidUserTypeException, BadRequestException, NotFoundException, NullValueException {
+    public static List<String> getData(UserProfile user) throws SystemBusyException, InvalidUserTypeException, BadRequestException, NotFoundException, InvalidUserDataException {
         IDataCollector dataCollector = new DataCollector();
         String data = dataCollector.collectData(user);
         String[] parts = data.split("/");

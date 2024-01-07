@@ -17,7 +17,7 @@ import java.util.List;
 public class ExportData implements  IExport {
     private static final Logger logger = LogManager.getLogger(ExportData.class);
     @Override
-    public void exportData(UserProfile user, EnumAction action) throws SystemBusyException, InvalidUserTypeException, BadRequestException, NotFoundException, NullValueException, InvalidUploadTypeException, FileFiledException, IOException, DbxException, InvalidActionTypeException, InvalidConvertTypeException {
+    public void exportData(UserProfile user, EnumAction action) throws SystemBusyException, InvalidUserTypeException, BadRequestException, NotFoundException, InvalidUserDataException, InvalidUploadTypeException, FileFiledException, IOException, DbxException, InvalidActionTypeException, InvalidConvertTypeException {
         List<String> data = ExportUtils.getData(user);
         byte[] zipData;
 

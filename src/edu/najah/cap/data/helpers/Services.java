@@ -17,6 +17,9 @@ public class Services {
     private static IPostService postService;
     private static IPayment paymentService;
     private static final Logger logger = LogManager.getLogger(Services.class);
+
+    private Services(){}
+
     public static void setServices(IUserService userService,
                                    IUserActivityService userActivityService,
                                    IPostService postService,
